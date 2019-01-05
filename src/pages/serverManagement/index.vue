@@ -2,8 +2,8 @@
     <div class="outer_wrap blockchainManagement">
    
         <div class="blockManagement_TopTile">
-            <span>区块链浏览器</span>
-            <span @click="deployFlag=true">+部署区块链</span>
+            <span>服务器管理</span>
+            <span @click="deployFlag=true">+添加服务器</span>
         </div>
         <div class="blockMangement_listsWrap">
             <el-table
@@ -13,23 +13,28 @@
                 <el-table-column
                 fixed
                 prop="date"
-                label="链名称">
+                label="服务器名称">
                 </el-table-column>
                 <el-table-column
                 prop="name"
-                label="区块链类型">
+                label="服务器IP">
                 </el-table-column>
                 <el-table-column
                 prop="province"
-                label="建立时间">
+                label="部署区块链">
+                </el-table-column>
+                <el-table-column
+                prop="province"
+                label="状态">
+                </el-table-column>
+                <el-table-column
+                prop="province"
+                label="在线时长">
                 </el-table-column>
                 <el-table-column
                 fixed="right"
                 label="操作">
                     <template slot-scope="scope">
-                        <span 
-                            @click="deployStatus=true"
-                            class="blockchainOperBtn">监控</span>
                         <span 
                             @click="deployStatus=true"
                             class="blockchainOperBtn">启动</span>
@@ -45,45 +50,30 @@
         </div>
 
 
-        <el-dialog title="部署区块链" :visible.sync="deployFlag">
+        <el-dialog title="添加服务器" :visible.sync="deployFlag">
             <div class="deployContainerWrap">
 
                 <div class="deployContainerListWrap deployContainerListWrap1">
-                    <span>链名称:</span>
+                    <span>服务器IP:</span>
                     <input
-                        placeholder="请输入区块链名称 仅支持英文字母和数字" 
+                        placeholder="请输入服务器IP" 
                         type="text">
                 </div>
 
 
                 <div class="deployContainerListWrap">
                     <div>
-                        <span>共识节点数:</span>
+                        <span>管理员账户名:</span>
                         <input
-                            placeholder="请输入区块链名称 仅支持英文字母和数字" 
                             type="text">
                     </div>
                     <div>
-                        <span>数据节点数:</span>
-                        <input
-                            placeholder="请输入区块链名称 仅支持英文字母和数字" 
-                            type="text">
-                    </div>
-                </div>
-                <div class="deployContainerListWrap">
-                    <div>
-                        <span>部署服务器:</span>
-                        <select>
-                            <option value="111">1111</option>
-                        </select>
-                    </div>
-                    <div>
-                        <span>部署节点数:</span>
+                        <span>管理员密码:</span>
                         <input
                             type="text">
                     </div>
                 </div>
-                <div class="deployContainerAddlistBtn">添加服务器</div>
+               
                 
                 
             </div>
@@ -91,15 +81,15 @@
                 <div class="deployBtnWrap">
                     <div 
                         class=""
-                        @click="deployFlag = false">部署</div>
+                        @click="deployFlag = false">确定</div>
                    
                 </div>
             </div>
         </el-dialog>
 
-        <el-dialog title="删除区块链" :visible.sync="delblockchainFlag">
+        <el-dialog title="删除服务器" :visible.sync="delblockchainFlag">
             <div class="delblockchainContainer">
-                <span>⚠️请注意，删除区块链将导致链上数据全部清除，无法找回，请再次输入管理员密码以确认删除</span>
+                <!-- <span>⚠️请注意，删除区块链将导致链上数据全部清除，无法找回，请再次输入管理员密码以确认删除</span> -->
                 <input 
                     placeholder="请输入管理员密码"
                     type="text">
@@ -125,7 +115,6 @@
                 <div class="el-icon-loading">
                 </div>
             </div>
-            
         </div>
 
 
@@ -190,8 +179,6 @@ export default {
     }
 }
 </script>
+<style lang="scss">
 
-
-
-
-
+</style>

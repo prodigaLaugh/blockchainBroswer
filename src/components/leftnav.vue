@@ -3,8 +3,8 @@
         <router-link to="/main/blockchainManagement">区块链管理</router-link>
         <router-link to="/main/blockchainMonitor">区块链监控</router-link>
         <router-link to="/main/blockchainBrowser">区块链浏览器</router-link>
-        <router-link to="/main/searchGZH" >服务器管理</router-link>
-        <router-link to="/main/searchGZH" >节点管理</router-link>
+        <router-link to="/main/serverManagement" >服务器管理</router-link>
+        <router-link to="/main/nodeManagement" >节点管理</router-link>
         <router-link to="/main/userManagement" >用户管理</router-link>
     </div>
 

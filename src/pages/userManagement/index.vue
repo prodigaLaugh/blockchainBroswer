@@ -30,10 +30,11 @@
                 <el-table-column
                 fixed="right"
                 label="操作">
-                <template slot-scope="scope">
-                    <span >查看</span>
-                    <span >编辑</span>
-                </template>
+                    <template slot-scope="scope">
+                        <span @click="editPassFlag=true">修改密码</span>
+                        <span @click="setUserFlag=true">设置</span>
+                        <span @click="delUserFlag=true">删除</span>
+                    </template>
                 </el-table-column>
             </el-table>
         </div>
@@ -76,6 +77,86 @@
             </div>
         </el-dialog>
 
+        <el-dialog title="用户设置" :visible.sync="setUserFlag">
+            <div class="userOperateListsWrap">
+                <div>
+                    <div class="userOperateListWrap">
+                        <div>用户名</div>
+                        <input 
+                            placeholder="请输入用户名"
+                            type="text">
+                    </div>
+                    <div class="userOperateListWrap">
+                        <div>设定密码</div>
+                        <input 
+                            type="text">
+                    </div>
+                </div>
+
+                <div>
+                    <div class="userOperateListWrap">
+                        <div>用户类型</div>
+                        <select>
+                            <option value="111">11111</option>
+                        </select>
+                    </div>
+                    <div class="userOperateListWrap">
+                        <div>再次输入密码</div>
+                        <input 
+                            type="text">
+                    </div>
+                </div>
+                
+            </div>
+            <div slot="footer" class="dialog-footer">
+                <div 
+                    class="userOperateBtn"
+                    @click="addUserFlag = false">确定</div>
+            </div>
+        </el-dialog>
+
+        <el-dialog title="删除用户" :visible.sync="delUserFlag">
+            <div class="userDelListsWrap">
+                <span>⚠️请在此确认是否要删除用户username？</span>
+                <input 
+                    placeholder="请输入管理员密码"
+                    type="text">
+                
+            </div>
+            <div slot="footer" class="dialog-footer">
+                <div class="userDelBtnWrap">
+                    <div 
+                        class="userDelBtn"
+                        @click="delUserFlag = false">确认删除</div>
+                    <div 
+                        class="userDelBtn"
+                        @click="delUserFlag = false">取消</div>
+                </div>
+            </div>
+        </el-dialog>
+
+        <el-dialog title="修改密码" :visible.sync="editPassFlag">
+            <div class="userDelListsWrap">
+                <input 
+                    placeholder="请设定新密码"
+                    type="text">
+                <input 
+                    placeholder="请再次输入新密码"
+                    type="text">
+                
+            </div>
+            <div slot="footer" class="dialog-footer">
+                <div class="userDelBtnWrap">
+                    <div 
+                        class="userDelBtn userEditBtn"
+                        @click="editPassFlag = false">确认</div>
+                    <div 
+                        class="userDelBtn"
+                        @click="editPassFlag = false">取消</div>
+                </div>
+            </div>
+        </el-dialog>
+
 
     </div>
 </template>
@@ -91,6 +172,9 @@ export default {
     data(){
         return {
             addUserFlag:false,
+            setUserFlag:false,
+            delUserFlag:false,
+            editPassFlag:false,
             tableData: [{
                     date: '2016-05-03',
                     name: '王小虎',
@@ -189,12 +273,50 @@ export default {
     }
     .userOperateBtn{
         width:180px;
-        line-height:30px;
+        line-height:40px;
         background:rgba(22, 155, 213, 1);
         color:#fff;
         margin:0 auto;
         border-radius:5px;
         @include pointer;
+    }
+
+    .userDelListsWrap{
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        >input{
+            border:1px solid #ddd;
+            width:300px;
+            height:30px;
+            margin-top:30px;
+            padding-left:10px;
+        }
+    }
+    .userDelBtnWrap{
+        display:flex;
+        justify-content: center;
+        >.userDelBtn{
+            width:100px;
+            line-height:30px;
+            border-radius:5px;
+            font-size:14px;
+            @include pointer;
+            &:nth-of-type(1){
+                color:#fff;
+                background:rgba(255, 0, 0, 1);
+                margin-right:40px;
+            }
+            &:nth-of-type(2){
+                color:#333;
+                border:1px solid #666;
+                margin-right:40px;
+            }
+            &.userEditBtn{
+                background:rgba(22, 155, 213, 1);
+            }
+        }
     }
 }
 </style>

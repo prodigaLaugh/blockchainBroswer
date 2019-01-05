@@ -55,6 +55,20 @@ const router=new VueRouter({
 					},
 				},
 				{
+					path:'serverManagement',//服务器管理
+					component:resolve => require(['@/pages/serverManagement'], resolve),
+					meta: { 
+						// requiresAuth: true
+					},
+				},
+				{
+					path:'nodeManagement',//服务器管理
+					component:resolve => require(['@/pages/nodeManagement'], resolve),
+					meta: { 
+						// requiresAuth: true
+					},
+				},
+				{
 					path:'',
 					redirect:'blockchainManagement'
 				}
