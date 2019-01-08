@@ -7,21 +7,26 @@ import * as commonFilters from '@/util/filter.js'
 
 import './util/config.js'
 import Vue from 'vue'
-// 区块浏览器 区块链监控 用户管理
+
+import commonFn from './util/common.js'
+Vue.use(commonFn)
+
 
 Object.keys(commonFilters).forEach(key => {
   Vue.filter(key, commonFilters[key])
 })
 
-import VueRouter from 'vue-router'
-Vue.use(VueRouter);
+
 
 import router from './router'
 
 
-import commonFn from './util/common.js'
-Vue.use(commonFn)
 
+import http from '@/util/http.js'
+Vue.use(http);
+
+import {  Message  } from 'element-ui';
+Vue.prototype.$message = Message;
 
 
 //公共组建

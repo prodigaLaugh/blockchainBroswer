@@ -18,6 +18,14 @@ let timestampToTime = (timestamp) => {
     return Y+M+D+h+m+s;
 }
 
+let userType = (val) => {
+     var obj = {
+          0:'超级用户',
+          1:'常规用户'
+     }
+     return obj[val]
+}
 
 
-export { interceptStr,  timestampToTime }
+
+export { interceptStr,  timestampToTime, userType }

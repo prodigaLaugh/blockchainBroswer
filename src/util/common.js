@@ -5,7 +5,7 @@ export default{
 		
 		Vue.prototype.linkTo = function (path,obj) {
       this.$router.push({path:path,query:obj});
-		}
+    }  
     
     
   }

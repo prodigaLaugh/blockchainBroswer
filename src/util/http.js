@@ -2,16 +2,14 @@
 import axios from 'axios'
 import * as auth from './auth.js'
 //axios.defaults.withCredentials=true;
-const token=auth.getCommonToken();
 
-
-
-
+import {setCookie, getCookie, delCookie } from '@/util/cookie'
+let token = getCookie('USERTOKEN');
 
 const myAxios = axios.create({
-    // baseURL:'http://api.yirongwang.com' ,
+    baseURL:'http://192.168.100.216:8080/v1' ,
     timeout:60*1000000000,
-    headers: {'token':token},
+    // headers: {'token':token},
     validateStatus: function (status) {
         return status < 500; 
     }

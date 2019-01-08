@@ -11,6 +11,7 @@
 				<span>用户名</span>
 				<input 
 					placeholder="请输入用户名"
+					v-model="loginParams.user_name"
 					type="text"/>
 			</div>
 
@@ -18,22 +19,25 @@
 				<span>密码</span>
 				<input 
 					placeholder="请输入密码"
-					type="text"/>
+					v-model="loginParams.password"
+					type="password"/>
 			</div>
 
 			<div class="loginInpWrap">
 				<span></span>
 				<label>
-					<input type="checkbox"/>
+					<input 
+						v-model="autoLogin"
+						type="checkbox"/>
 					<span>3天内自动登录</span>
 				</label>
 			</div>
-
 			<div class="loginInpWrap">
 				<span>校验码</span>
 				<div>
 					<input 
 						placeholder="请输入右侧的验证码"
+						v-model="verifycode"
 						type="text">
 						<div @click="refreshCode">
 							<s-identify :identifyCode="identifyCode" ></s-identify>
@@ -42,7 +46,9 @@
 				</div>
 			</div>
 
-			<div class="loginBtn">登录</div>
+			<div 
+				@click="login"
+				class="loginBtn">登录</div>
 
 		</div>
 	</div>
@@ -50,6 +56,8 @@
 
 <script>
 import SIdentify from '@/components/identify'
+import {setCookie, getCookie } from '@/util/cookie'
+
 export default {
   components:{
 	  SIdentify
@@ -57,7 +65,16 @@ export default {
   data() {
     return {
       identifyCodes: "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIGKLMNOPQRSTUVWXYZ",
-      identifyCode: ""
+			identifyCode: "",
+			verifycode:"",
+
+			autoLogin:false,
+			loginFlag:true,
+
+			loginParams:{
+				user_name:'',
+				password:''
+			}
     };
   },
   mounted() {
@@ -65,6 +82,79 @@ export default {
     this.makeCode(this.identifyCodes, 4);
   },
   methods: {
+		login(){
+			let url = `/deploy_user/login`
+			let params = this.loginParams;
+
+			if(!this.loginParams.user_name ||
+				!this.loginParams.password ||
+				!this.verifycode){
+					this.$message ({
+							message: '请完善信息',
+							type: 'warning'
+					});
+					return false;
+			}
+
+			if(this.verifycode.toLocaleLowerCase() !== this.identifyCode.toLocaleLowerCase()){
+					this.$message ({
+							message: '验证码不正确',
+							type: 'warning'
+					});
+					return false;
+			}
+		
+			
+
+
+			if(!this.loginFlag){
+					return false;
+			}
+			this.loginFlag = false;
+
+			this.$http.post(url,params)
+					.then(({data})=>{
+						this.addUserFlag = false;
+						let type = 'warning',
+								message = '登录成功',
+								hour = 1,
+								autoLogin = 'false';
+						if(data.code === '0'){
+								type = 'success';
+								if(this.autoLogin){
+									hour = 24 * 3;
+									autoLogin = 'true';
+								}
+								setCookie('USERTOKEN',data.data.token,hour)
+								setCookie('autoLogin',autoLogin,hour)
+								setTimeout(()=>{
+									location.href  = '/main';
+								},1500)
+								
+						}else{
+							message = data.msg
+						}
+						this.$message ({
+								message: message,
+								type: type
+						});
+						
+						setTimeout(()=>{
+							this.loginFlag = true;
+						},1500)
+
+
+					})
+					.catch(({data})=>{
+						console.log(data)
+						this.$message ({
+								message: data && data.data,
+								type: 'warning'
+						});
+						this.loginFlag = true;
+					})
+			// USERTOKEN
+		},
     randomNum(min, max) {
       return Math.floor(Math.random() * (max - min) + min);
     },
@@ -77,7 +167,7 @@ export default {
         this.identifyCode += this.identifyCodes[
           this.randomNum(0, this.identifyCodes.length)
         ];
-	  }
+	  	}
     }
   }
 };

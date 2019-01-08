@@ -3,13 +3,26 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter);
 
+import {setCookie, getCookie, delCookie } from '@/util/cookie'
+
 
 //login
 import Login from '@/pages/login'
 
+var redirectUrl = '/login';
 
-var USERPROVINCE=window.localStorage.USERPROVINCE;
-var redirectUrl=USERPROVINCE?'home':'selectCitys';
+let token = getCookie('USERTOKEN');
+let autoLogin = getCookie('autoLogin');
+if(token){
+	let hour = autoLogin == 'true' ? 24*3 : 24;
+	delCookie('USERTOKEN')
+	setCookie('USERTOKEN',token,hour)
+
+	delCookie('autoLogin')
+	setCookie('autoLogin',autoLogin,hour)
+	redirectUrl = '/main'
+}
+
 //路由配置
 const router=new VueRouter({
 	mode:'history',
@@ -125,7 +138,7 @@ const router=new VueRouter({
 		},
 		{
 			path:'',
-			redirect:'/main'
+			redirect:redirectUrl
 		}
 		
 	],
