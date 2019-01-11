@@ -268,7 +268,6 @@ export default {
                 flex-direction: column;
                 justify-content: center;
                 padding-left:40px;
-                padding-right:102px;
                 
                 border-bottom:1px solid #f4f4f4;
                 height:168px;

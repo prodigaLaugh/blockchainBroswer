@@ -61,7 +61,7 @@ export default {
     },
     data(){
         return {
-            navIndex:1,
+            navIndex:0,
 
             chain_name:'',
             blockchainLists:[],
