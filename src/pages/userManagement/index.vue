@@ -1,5 +1,5 @@
 <template>
-    <div class="usermanagementWrap">
+    <div class="outer_wrap usermanagementWrap">
         <div class="usermanagementTitle">
             <div>用户管理</div>
             <span @click="addUserFlag=true">+用户</span>
@@ -37,9 +37,9 @@
                     fixed="right"
                     label="操作">
                     <template slot-scope="scope">
-                        <span @click.prevent="clickSetUser(scope.row,'editPassFlag','editPassParams')">修改密码</span>
-                        <span @click.prevent="clickSetUser(scope.row,'setUserFlag','setUserParams')">设置</span>
-                        <span @click.prevent="clickDelBtn(scope.row.user_id,scope.$index)">删除</span>
+                        <span class="usermanagementListOperBtn" @click.prevent="clickSetUser(scope.row,'editPassFlag','editPassParams')">修改密码</span>
+                        <span class="usermanagementListOperBtn" @click.prevent="clickSetUser(scope.row,'setUserFlag','setUserParams')">设置</span>
+                        <span class="usermanagementListOperBtn" @click.prevent="clickDelBtn(scope.row.user_id,scope.$index)">删除</span>
                     </template>
                 </el-table-column>
             </el-table>
@@ -422,12 +422,13 @@ export default {
         justify-content: space-between;
         padding:30px 0 20px;
         >div{
-            font-size:16px;
+            font-size:20px;
         }
         >span{
             background:rgba(22, 155, 213, 1);
             color:#fff;
-            padding:4px 20px;
+            padding:0 20px;
+            line-height:30px;
             border-radius:5px;
             @include pointer;
         }
@@ -515,6 +516,10 @@ export default {
                 background:rgba(22, 155, 213, 1);
             }
         }
+    }
+    .usermanagementListOperBtn{
+        color:rgba(22, 155, 213, 1);;
+        @include pointer;
     }
 }
 </style>

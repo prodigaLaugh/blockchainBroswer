@@ -1,10 +1,13 @@
 <template>
     <div class="outer_wrap blockchainManagement">
    
+        
+        <div class="containerTopTitle">区块链浏览器</div>
+
         <div class="blockManagement_TopTile">
-            <span>区块链浏览器</span>
             <span @click="deployFlag=true">+部署区块链</span>
         </div>
+
         <div class="blockMangement_listsWrap">
             <el-table
                 :data="tableData"
@@ -45,7 +48,7 @@
         </div>
 
 
-        <el-dialog title="部署区块链" :visible.sync="deployFlag">
+        <el-dialog title="部署区块链" :visible.sync="deployFlag" width="70%">
             <div class="deployContainerWrap">
 
                 <div class="deployContainerListWrap deployContainerListWrap1">
@@ -60,13 +63,13 @@
                     <div>
                         <span>共识节点数:</span>
                         <input
-                            placeholder="请输入区块链名称 仅支持英文字母和数字" 
+                            placeholder="" 
                             type="text">
                     </div>
                     <div>
                         <span>数据节点数:</span>
                         <input
-                            placeholder="请输入区块链名称 仅支持英文字母和数字" 
+                            placeholder="" 
                             type="text">
                     </div>
                 </div>
@@ -83,7 +86,7 @@
                             type="text">
                     </div>
                 </div>
-                <div class="deployContainerAddlistBtn">添加服务器</div>
+                <div class="deployContainerAddlistBtn">+添加服务器</div>
                 
                 
             </div>
@@ -97,9 +100,9 @@
             </div>
         </el-dialog>
 
-        <el-dialog title="删除区块链" :visible.sync="delblockchainFlag">
+        <el-dialog title="删除区块链" :visible.sync="delblockchainFlag" width="432px">
             <div class="delblockchainContainer">
-                <span>⚠️请注意，删除区块链将导致链上数据全部清除，无法找回，请再次输入管理员密码以确认删除</span>
+                <span>请注意，删除区块链将导致链上数据全部清除，无法找回，请再次输入管理员密码以确认删除</span>
                 <input 
                     placeholder="请输入管理员密码"
                     type="text">
@@ -190,6 +193,12 @@ export default {
     }
 }
 </script>
+<style lang="scss" scoped>
+    .blockMangement_listsWrap{  
+        padding:0 38px 106px 32px;
+        background:#fff;
+    }
+</style>
 
 
 

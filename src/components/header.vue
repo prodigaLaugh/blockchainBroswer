@@ -2,11 +2,11 @@
   <div  class="commonHeaderWrap">
     <div class="commonHeader">
       <div class="commonHeaderLeftWrap">
-        logo
+        <!-- logo -->
       </div>
 
       <div class="commonHeaderRightWrap">
-        admin
+        <span>admin</span>
       </div>
     </div>
   </div>
@@ -26,7 +26,17 @@
       display:flex;
       justify-content: space-between;
       align-items:center;
-      background:#eee;
+      background:$blue;
+      z-index:20;
+    }
+    .commonHeaderRightWrap{
+      span{
+        padding-right:32px;
+        padding-left:28px;
+        background:url(../assets/defaultAvatar.png) no-repeat left center;
+        color:#fff;
+        line-height:32px;
+      }
     }
   }
 </style>

@@ -91,15 +91,40 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 	color: #a0a0a0;   
 }
 
-
+.blue{
+  color:#4778c7;
+  cursor:pointer;
+}
 
 body{
-  background:#fff;
+  background:#f4f4f4;
+  min-width:1000px;
 }
 
 .outer_wrap{
   flex:1;
 }
+.detailOuterWrap{
+  padding:0 30px;
+}
+
+
+.el-pagination{
+  padding:20px 0;
+}
+.el-pagination.center{
+  text-align: center;
+}
+.el-table thead th:last-of-type{
+  padding-left:0!important;
+}
+.el-table .cell{
+  white-space: nowrap;
+}
+.el-table .cell .cell{
+  padding-left:0!important;
+}
+
 
 
 

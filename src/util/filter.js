@@ -6,6 +6,10 @@ let interceptStr = str => {
                : '--';
 }
 
+let operStrNull = str => {
+     return str ? str : '--';
+}
+
 
 let timestampToTime = (timestamp) => {
     var date = new Date(timestamp * 1000);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
@@ -28,4 +32,4 @@ let userType = (val) => {
 
 
 
-export { interceptStr,  timestampToTime, userType }
+export { interceptStr,  timestampToTime, userType, operStrNull }

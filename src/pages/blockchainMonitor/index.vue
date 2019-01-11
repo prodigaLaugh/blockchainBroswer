@@ -1,11 +1,14 @@
 <template>
     <div class="outer_wrap">
-        <div class="blockchainTitle">区块链监控</div>
+        <div class="containerTopTitle">区块链监控</div>
 
         <div class="blockchainSelectWrap">
             <span>请指定区块链</span>
-            <select>
-                <option value="111">11111</option>
+            <select v-model="chain_name">
+                <option 
+                    v-for="(item,index) in blockchainLists"
+                    :key="index"
+                    :value="item.Chainid">{{item.Chainid}}</option>
             </select>
         </div>
 
@@ -23,11 +26,11 @@
         </div>
 
         <div v-if="navIndex === 0">
-            <net-overview/>
+            <net-overview :chain_name="chain_name"/>
         </div>
 
         <div v-if="navIndex === 1">
-            <assetMonitor/>
+            <assetMonitor :chain_name="chain_name"/>
         </div>
 
         <div v-if="navIndex === 2">
@@ -54,59 +57,52 @@ export default {
         nodeMonitor
     },
     created(){
-
+        this.getBlockchains()
     },
     data(){
         return {
-            navIndex:0
+            navIndex:1,
+
+            chain_name:'',
+            blockchainLists:[],
         }
     },
     methods:{
-        
+        getBlockchains(){
+            this.getBlockchainLists((data)=>{
+                this.blockchainLists = data.data;
+                this.chain_name = this.blockchainLists[0].Chainid;
+            },()=>{
+
+            })
+        },
     }
 }
 </script>
 
 <style lang="scss" scoped>
-   .blockchainTitle{
-       padding:30px 0 20px;
-       font-size:22px;
-   } 
-   .blockchainSelectWrap{
-       display:flex;
-       align-items: center;
-       >span{
-           margin-right:10px;
-       }
-       >select{
-           width:300px;
-           height:30px;
-       }
-   }
-   .blockchainNavWrap{
-       display:flex;
-       border-bottom:1px solid #ddd;
-       padding-top:30px;
-       >span{
-           margin-right:40px;
-           font-size:16px;
-           padding-bottom:4px;
-           @include pointer;
-           transition:color .5s;
-           &.active{
-               color:#169BD5;
-               position:relative;
-               
-               &:after{
-                   position:absolute;
-                   content:'';
-                   left:0;
-                   right:0;
-                   bottom:0;
-                   border-bottom:2px solid #169BD5;
-               }
-           }
-       }
-   }
+    .blockchainTitle{
+        padding:30px 0 20px;
+        font-size:20px;
+    } 
+    .blockchainSelectWrap{
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        background:#fff;
+        padding:37px 0 20px 60px;
+        font-size:14px;
+        color:$color-333;
+        >span{
+            padding-bottom:15px;
+        }
+        >select{
+            width:460px;
+            height:50px;
+            border: 0px;
+            outline: 1px solid #dddddd;
+        }
+    }
+   
 </style>
 

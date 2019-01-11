@@ -116,9 +116,9 @@ export default {
 					.then(({data})=>{
 						this.addUserFlag = false;
 						let type = 'warning',
-								message = '登录成功',
-								hour = 1,
-								autoLogin = 'false';
+							message = '登录成功',
+							hour = 1,
+							autoLogin = 'false';
 						if(data.code === '0'){
 								type = 'success';
 								if(this.autoLogin){

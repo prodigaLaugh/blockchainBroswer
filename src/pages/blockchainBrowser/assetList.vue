@@ -5,42 +5,43 @@
         <div class="assetListsTitle">链上资产</div>
         <div class="assetLists">
             <el-table
-                :data="tableData6"
+                :data="assetsLists"
+                @sort-change="aa"
                 border
                 style="width: 100%">
                 <el-table-column
-                prop="id"
-                label="资产ID"
-                width="180">
+                    prop="asset_id"
+                    label="资产ID"
+                    width="180">
                 </el-table-column>
                 <el-table-column
-                prop="name"
-                label="资产名称">
+                    prop="asset_name"
+                    label="资产名称">
                 </el-table-column>
                 <el-table-column
-                prop="amount1"
-                sortable
-                label="最后交易">
+                    prop="late_txtime"
+                    sortable="custom"
+                    label="最后交易">
                 </el-table-column>
                 <el-table-column
-                prop="amount2"
-                sortable
-                label="发行总量">
+                    prop="issue_amount"
+                    sortable="custom"
+                    label="发行总量">
                 </el-table-column>
                 <el-table-column
-                prop="amount3"
-                sortable
-                label="总市值">
+                    prop="market_value"
+                    sortable="custom"
+                    label="总市值">
                 </el-table-column>
                 <el-table-column
-                prop="amount3"
-                sortable
-                label="持有人数">
+                    prop="holders"
+                    sortable="custom"
+                    label="持有人数">
                 </el-table-column>
                 <el-table-column
-                prop="amount3"
-                sortable
-                label="近一个月交易数">
+                    prop="txs_num"
+                    sortable="custom"
+                    label="近一个月交易数">
                 </el-table-column>
             </el-table>
         </div>
@@ -59,71 +60,75 @@ Vue.use(Table);
 Vue.use(TableColumn);
 
 export default {
+    created(){
+        // this.getAssetLists();
+    },
+    mounted(){
+        this.scroll();
+    },
     components: {  
 		myHeader
 	},
     data(){
         return {
-            tableData6: [{
-                id: '12987122',
-                name: '王小虎',
-                amount1: '234',
-                amount2: '3.2',
-                amount3: 10
-            }, {
-                id: '12987123',
-                name: '王小虎',
-                amount1: '165',
-                amount2: '4.43',
-                amount3: 12
-            }, {
-                id: '12987124',
-                name: '王小虎',
-                amount1: '324',
-                amount2: '1.9',
-                amount3: 9
-            }, {
-                id: '12987125',
-                name: '王小虎',
-                amount1: '621',
-                amount2: '2.2',
-                amount3: 17
-            }, {
-                id: '12987126',
-                name: '王小虎',
-                amount1: '539',
-                amount2: '4.1',
-                amount3: 15
-            }]
+            orderParams:{
+                condition:'',
+                order_by:'',
+                chain_name:'m0',
+                page:0,
+                page_size:1,
+            },
+            isLoading:true,
+
+            assetsLists:[],
+
+            
         }
     },
     methods: {
-      getSummaries(param) {
-        const { columns, data } = param;
-        const sums = [];
-        columns.forEach((column, index) => {
-          if (index === 0) {
-            sums[index] = '总价';
-            return;
-          }
-          const values = data.map(item => Number(item[column.property]));
-          if (!values.every(value => isNaN(value))) {
-            sums[index] = values.reduce((prev, curr) => {
-              const value = Number(curr);
-              if (!isNaN(value)) {
-                return prev + curr;
-              } else {
-                return prev;
-              }
-            }, 0);
-            sums[index] += ' 元';
-          } else {
-            sums[index] = 'N/A';
-          }
-        });
+        aa(val){
+            if(val.prop){
+                this.orderParams.condition = val.prop;
+                this.orderParams.order_by = val.order === 'ascending' ? "ASC" : "DESC";
+                
+            }else{
+                this.orderParams.condition = '';
+                this.orderParams.order_by = '';
+            }
+            this.assetsLists = [];
+            this.getAssetLists();
+        },
+        
+        getAssetLists(){
+            let url = `/chain_browser/getChainAssetInfoList`
+            if(!this.isLoading){
+                return false;
+            }
+            this.$http.post(url,this.orderParams)
+                .then(({data})=>{
+                    let lists = data.data.asset_list;
+                    if(lists&&lists.length){
+                        this.assetsLists = [...this.assetsLists,...lists];
+                        this.isLoading = true;
+                    }else{
+                        this.isLoading = false;
+                    }
+                    
+                })
+                .catch((data)=>{
 
-        return sums;
-      }
+                })
+        },
+        scroll(person) {
+            window.onscroll = () => {
+                let bottomOfWindow = document.documentElement.offsetHeight - document.documentElement.scrollTop - window.innerHeight <= 200
+                if (bottomOfWindow && this.isLoading) {
+                    let page = this.orderParams.page;
+                    this.orderParams.page = (page + 1);
+                    this.getAssetLists();
+                }
+            }
+        }
     }
 }
 </script>

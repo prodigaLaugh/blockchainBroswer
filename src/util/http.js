@@ -9,7 +9,7 @@ let token = getCookie('USERTOKEN');
 const myAxios = axios.create({
     baseURL:'http://192.168.100.216:8080/v1' ,
     timeout:60*1000000000,
-    // headers: {'token':token},
+    headers: {'token':token},
     validateStatus: function (status) {
         return status < 500; 
     }

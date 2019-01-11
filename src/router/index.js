@@ -116,7 +116,7 @@ const router=new VueRouter({
 			},
 		},
 		{
-			path:'/blockchainBrowser_assetsDetail',//交易详情
+			path:'/blockchainBrowser_assetsDetail',//资产详情
 			component: resolve => require(['@/pages/blockchainBrowser/assetsDetail'], resolve),
 			meta: { 
 				// requiresAuth: true
@@ -130,7 +130,7 @@ const router=new VueRouter({
 			},
 		},
 		{
-			path:'/blockchainBrowser_noresult',//UTXO详情
+			path:'/blockchainBrowser_noresult',//无结果
 			component: resolve => require(['@/pages/blockchainBrowser/noresult'], resolve),
 			meta: { 
 				// requiresAuth: true

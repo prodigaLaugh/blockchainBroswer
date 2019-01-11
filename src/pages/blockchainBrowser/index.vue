@@ -7,85 +7,169 @@
             </div>
             <div class="blockchainBrowser_top_selectWrap">
                 <span class="blockchainBrowser_top_selectLeftBox">指定区块链</span>
-                <select class="blockchainBrowser_top_select">
-                    <option value="11">111111</option>
+                <select 
+                    v-model="blockchain_select"
+                    class="blockchainBrowser_top_select">
+                    <option 
+                        v-for="(item,index) in lists"
+                        :key="index"
+                        :value="item.Chainid">{{item.Chainid}}</option>
                 </select>
             </div>
             <div class="blockchainBrowser_top_inpWrap">
                 <input 
                     placeholder="搜索地址/交易ID/区块高度/资产名/资产ID/UTXO"
+                    v-model="searchText"
+                    @keyup.enter="search"
                     type="text">
-                <span>搜索</span>
+                <span @click="search">搜索</span>
             </div>
         </div>
 
-        <div class="blockchainBrowser_container_title">最近区块</div>
+        <div class="blockchainBrowser_container_title">最近区块（Latest 10）</div>
         <div class="blockchainBrowser_container_listsWrap">
-            <el-row :gutter="10">
-                <el-col :xs="8" :sm="6" :md="4" :lg="3" :xl="1">
-                    <div class="grid-content bg-purple">区块高度</div>
-                </el-col>
-                <el-col :xs="4" :sm="6" :md="8" :lg="9" :xl="11">
-                    <div class="grid-content bg-purple-light">生成时间</div>
-                </el-col>
-                <el-col :xs="4" :sm="6" :md="8" :lg="9" :xl="11">
-                    <div class="grid-content bg-purple">交易量</div>
-                </el-col>
-                <el-col :xs="8" :sm="6" :md="4" :lg="3" :xl="1">
-                    <div class="grid-content bg-purple-light">区块大小(KB)</div>
-                </el-col>
-            </el-row>
-
-            <el-row :gutter="10">
-                <el-col :xs="8" :sm="6" :md="4" :lg="3" :xl="1">
-                    <div class="grid-content bg-purple">111</div>
-                </el-col>
-                <el-col :xs="4" :sm="6" :md="8" :lg="9" :xl="11">
-                    <div class="grid-content bg-purple-light">222</div>
-                </el-col>
-                <el-col :xs="4" :sm="6" :md="8" :lg="9" :xl="11">
-                    <div class="grid-content bg-purple">333</div>
-                </el-col>
-                <el-col :xs="8" :sm="6" :md="4" :lg="3" :xl="1">
-                    <div class="grid-content bg-purple-light">444</div>
-                </el-col>
-            </el-row>
+            <el-table
+                :data="indexInfo.block_list"
+                border
+                style="width: 100%">
+                <el-table-column
+                prop="block_height"
+                label="区块高度">
+                </el-table-column>
+                <el-table-column
+                prop="create_time"
+                label="生成时间">
+                </el-table-column>
+                <el-table-column
+                prop="tx_nums"
+                label="交易量">
+                </el-table-column>
+                <el-table-column
+                prop="block_size"
+                label="区块大小(KB)">
+                </el-table-column>
+            </el-table>
         </div>
         
+
+        <div class="blockchainBrowser_container_title">最活跃数字资产（Top 10）</div>
+        <div class="blockchainBrowser_container_listsWrap">
+            <el-table
+                :data="indexInfo.asset_toplist"
+                border
+                style="width: 100%">
+                <el-table-column
+                    prop="assetid"
+                    label="资产ID">
+                </el-table-column>
+                <el-table-column
+                    prop="assetname"
+                    label="资产名称">
+                </el-table-column>
+                <el-table-column
+                    prop="issueamount"
+                    label="发行总量">
+                </el-table-column>
+                <el-table-column
+                    prop="holdernums"
+                    label="持有人数(KB)">
+                </el-table-column>
+                <el-table-column
+                    prop="txnumsmonth"
+                    label="近一个月交易次数">
+                </el-table-column>
+            </el-table>
+        </div>
+
+
     </div>
 </template>
 
 <script>
 
-import Vue from 'vue'
-import { Row, Col } from 'element-ui';
-Vue.use(Row);
-Vue.use(Col);
+
+
+import Vue from 'vue';
+import { Table, TableColumn } from 'element-ui';
+Vue.use(Table);
+Vue.use(TableColumn);
 
 export default {
     created(){
-
+        this.getBlockchains();
     },
     components: {  
         
 	},
     data(){
         return {
-            
+            searchText:'',
+            blockchain_select:'',
+            lists:[],
+
+            indexInfo:{}
         }
     },
     methods:{
-        
+        search(){
+            if(!this.searchText){
+                this.$message({
+                    message: '搜索内容不能为空！',
+					type: 'warning'
+                })
+                return false;
+            }
+            let params = {
+                chain_name:this.blockchain_select,
+                search:this.searchText.trim()
+            }
+            this.getSearchType(params,(data)=>{
+                let params = {
+                    chainid:this.blockchain_select,
+                    searchText:this.searchText
+                }
+                this.goUrlByType(data.data, params)
+            },(data)=>{
+                this.$message({
+                    message: data.msg,
+					type: 'warning'
+                })
+            })
+        },
+        getBlockchains(){
+            this.getBlockchainLists((data)=>{
+                this.lists = data.data;
+                this.blockchain_select = this.lists[0].Chainid;
+                this.getIndexInfo(this.blockchain_select)
+            },()=>{
+
+            })
+        },
+        getIndexInfo(){
+            let url = `/chain_browser/initChainBrowser/${this.blockchain_select}`;
+            this.$http.get(url)
+                .then(({data})=>{
+                    console.log(data)
+                    this.indexInfo = data.data
+                })
+                .catch(()=>{
+
+                })
+        }
     }
 }
 </script>
 <style lang="scss" scoped>
-.outer_wrap{
-    padding-left:20px;
-}
+
 .blockchainBrowser_Top_title{
     padding:30px 0 20px 0;
     font-size:20px;
+}
+.blockchainBrowser_Top_wrap{
+    select,input{
+        height:30px;
+        padding-left:8px;
+    }
 }
 .blockchainBrowser_top_selectWrap{
     display:flex;
@@ -97,7 +181,6 @@ export default {
     }
     .blockchainBrowser_top_select{
         width:300px;
-        height:20px;
     }
 }
 
@@ -111,17 +194,19 @@ export default {
     }
     >span{
         margin-left:20px;
-        padding:2px 10px;
-        background:#fff;
-        color:#333;
-        border:1px solid #ddd;
+        width:100px;
+        height:30px;
+        line-height:30px;
         border-radius:2px;
+        text-align:center;
+        background:#169BD5;
+        color:#fff;
         @include pointer;
     }
 }
 .blockchainBrowser_container_title{
-    padding:20px 0 10px 0;
-    font-size:18px;
+    padding:40px 0 20px 0;
+    font-size:20px;
 }
 
 .blockchainBrowser_container_listsWrap{

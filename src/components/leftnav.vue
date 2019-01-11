@@ -9,28 +9,59 @@
     </div>
 
 </template>
+
 <style lang="scss" scoped>
+.commonContainerWrap.active{
+    .task_left_wrap{
+        left:-140px;
+    }
+}
 .task_left_wrap{
-    width:200px;
-    border: 1px solid #f4f4f4;
-    height: 500px;
-    margin-bottom:40px;
-    margin-right:10px;
-    >span,>a{
+    width:140px;
+    background:$blue;
+    padding-left:5px;
+    position:fixed;
+    left:0;
+    top:70px;
+    bottom:0;
+    z-index:10;
+    transition:all .5s;
+    >a{
         display: block;
         text-align: center;
-        padding: 15px 0;
-        border-bottom: 1px solid #f4f4f4;
-        font-size:16px;
+        font-size:12px;
+        color:#fff;
+        background:url(../assets/leftNavIcon1.png) no-repeat 4px center;
+        padding-left:22px;
+        line-height:40px;
+        position:relative;
+        &:nth-of-type(2){
+            background-image:url(../assets/leftNavIcon2.png);
+        }
+        &:nth-of-type(3){
+            background-image:url(../assets/leftNavIcon3.png);
+        }
+        &:nth-of-type(4){
+            background-image:url(../assets/leftNavIcon4.png);
+        }
+        &:nth-of-type(5){
+            background-image:url(../assets/leftNavIcon5.png);
+        }
+        &:nth-of-type(6){
+            background-image:url(../assets/leftNavIcon6.png);
+        }
+        &:after{
+            content:'';
+            position:absolute;
+            left:-5px;
+            right:0;
+            bottom:0;
+            border-bottom:1px solid #749be3;
+        }
     }
-    >span{
-        color: #2579db;
-        font-weight:500;
-        font-size:18px;
-    }
-    a.Aactive{
-        background: #2579db !important;
-        color: #ffffff;
+    >a.Aactive{
+        background-color: #0e53c2;
+        background-position:6px center;
     }
 }
 </style>
