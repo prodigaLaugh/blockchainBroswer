@@ -77,6 +77,11 @@
             border-right:1px solid #dddddd;
         }
     }
+		.el-table .cell, .el-table th div{
+			padding-left:0!important;
+			display:flex;
+			justify-content: space-between;
+		}
     
     
 

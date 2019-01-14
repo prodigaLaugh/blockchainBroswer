@@ -100,7 +100,6 @@ export default{
    
     .blockchainOperBtn{
         color:$blue;
-        margin-right:32px;
         font-size:16px;
         @include pointer;
         &:last-of-type{
