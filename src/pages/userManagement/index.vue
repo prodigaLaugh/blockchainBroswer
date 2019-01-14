@@ -1,11 +1,13 @@
 <template>
-    <div class="outer_wrap usermanagementWrap">
-        <div class="usermanagementTitle">
-            <div>用户管理</div>
-            <span @click="addUserFlag=true">+用户</span>
-        </div>
+    <div class="outer_wrap blockchainManagement usermanagementWrap">
+				
+				<div class="containerTopTitle">用户管理</div>
+				
+				<div class="blockManagement_TopTile">
+						<span @click="deployFlag=true">+用户</span>
+				</div>
 
-        <div>
+        <div class="blockMangement_listsWrap">
             <el-table
                 :data="userLists"
                 border
@@ -521,6 +523,23 @@ export default {
         color:rgba(22, 155, 213, 1);;
         @include pointer;
     }
+}
+
+.usermanagementWrap{
+	.blockMangement_listsWrap{
+		padding:0 38px 106px 32px;
+		background:#fff;
+	}
+	
+	.el-table th,
+	.el-table td{
+			padding-left:0;
+			&:nth-of-type(1){
+				padding-left:20px;
+			}
+			
+	}
+	
 }
 </style>
 

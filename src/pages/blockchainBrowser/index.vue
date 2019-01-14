@@ -221,10 +221,11 @@ export default {
         margin-left:-1px;
     }
 }
+.blockchainBrowser_container_listsWrap{
+	background:#fff;
+}
 
 
 </style>
-
-
 
 

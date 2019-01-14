@@ -1,10 +1,11 @@
 <template>
     <div class="outer_wrap blockchainManagement">
    
-        <div class="blockManagement_TopTile">
-            <span>节点管理</span>
-            <span @click="deployFlag=true">+部署节点</span>
-        </div>
+				<div class="containerTopTitle">节点管理</div>
+				
+				<div class="blockManagement_TopTile">
+						<span @click="deployFlag=true">+部署节点</span>
+				</div>
         <div class="blockMangement_listsWrap">
             <el-table
                 :data="tableData"
@@ -197,3 +198,19 @@ export default {
     }
 }
 </script>
+
+<style lang="scss">
+.blockMangement_listsWrap{
+	padding:0 38px 106px 32px;
+	background:#fff;
+	.el-table th,
+	.el-table td{
+			padding-left:0;
+			&:nth-of-type(1){
+				padding-left:20px;
+			}
+			
+	}
+	
+}
+</style>

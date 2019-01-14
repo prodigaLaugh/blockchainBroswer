@@ -2,7 +2,7 @@
     <div class="outer_wrap blockchainManagement">
    
         
-        <div class="containerTopTitle">区块链浏览器</div>
+        <div class="containerTopTitle">区块链管理</div>
 
         <div class="blockManagement_TopTile">
             <span @click="deployFlag=true">+部署区块链</span>
