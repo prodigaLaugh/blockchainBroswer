@@ -6,6 +6,13 @@ let interceptStr = str => {
                : '--';
 }
 
+let interceptStr1 = str => {
+    return str ? str.length > 40
+                    ? str.slice(0,40) + '...'
+                    : str
+               : '--';
+}
+
 let operStrNull = str => {
      return str ? str : '--';
 }
@@ -32,4 +39,4 @@ let userType = (val) => {
 
 
 
-export { interceptStr,  timestampToTime, userType, operStrNull }
+export { interceptStr, interceptStr1,  timestampToTime, userType, operStrNull }

@@ -4,10 +4,11 @@ import * as auth from './auth.js'
 //axios.defaults.withCredentials=true;
 
 import {setCookie, getCookie, delCookie } from '@/util/cookie'
-let token = getCookie('USERTOKEN');
+let token = getCookie('USERTOKEN')||'';
 
 const myAxios = axios.create({
-    baseURL:'http://192.168.100.216:8080/v1' ,
+    // baseURL:'http://47.104.221.216:8000/v1' ,
+		baseURL:'/api',
     timeout:60*1000000000,
     headers: {'token':token},
     validateStatus: function (status) {

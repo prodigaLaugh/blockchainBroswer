@@ -435,9 +435,7 @@ export default {
             @include pointer;
         }
     }
-    .cell{
-        text-align:center;
-    }
+   
 
     .userOperateListsWrap{
         display:flex;

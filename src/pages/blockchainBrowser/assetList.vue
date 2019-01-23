@@ -1,12 +1,12 @@
 <template>
-    <div class="assetListsWrap">
+    <div class="assetListsWrap assetListsOuterWrap">
         <my-header/>
 
-        <div class="assetListsTitle">链上资产</div>
+		<div class="containerTopTitle">链上资产</div>
         <div class="assetLists">
             <el-table
                 :data="assetsLists"
-                @sort-change="aa"
+                @sort-change="sortLists"
                 border
                 style="width: 100%">
                 <el-table-column
@@ -61,7 +61,7 @@ Vue.use(TableColumn);
 
 export default {
     created(){
-        // this.getAssetLists();
+        this.getAssetLists();
     },
     mounted(){
         this.scroll();
@@ -76,7 +76,7 @@ export default {
                 order_by:'',
                 chain_name:'m0',
                 page:0,
-                page_size:1,
+                page_size:10,
             },
             isLoading:true,
 
@@ -86,7 +86,7 @@ export default {
         }
     },
     methods: {
-        aa(val){
+        sortLists(val){
             if(val.prop){
                 this.orderParams.condition = val.prop;
                 this.orderParams.order_by = val.order === 'ascending' ? "ASC" : "DESC";
@@ -122,6 +122,7 @@ export default {
         scroll(person) {
             window.onscroll = () => {
                 let bottomOfWindow = document.documentElement.offsetHeight - document.documentElement.scrollTop - window.innerHeight <= 200
+				console.log(bottomOfWindow,this.isLoading,1111)
                 if (bottomOfWindow && this.isLoading) {
                     let page = this.orderParams.page;
                     this.orderParams.page = (page + 1);
@@ -134,12 +135,22 @@ export default {
 </script>
 
 <style lang="scss">
-.assetListsTitle{
-    padding:30px 0 20px;
-    font-size:20px;
-}
-.el-table .cell{
-    text-align:center;
+.assetListsOuterWrap{
+	padding:0 40px 40px;
+	.containerTopTitle {
+		padding: 30px 0 20px 32px;
+		font-size: 20px;
+	}
+	.el-table th:nth-of-type(7){
+		padding-left:0;
+	}
+	.el-table th,
+	.el-table td{
+		padding-left:50px;
+	}
+	.el-table td:last-of-type{
+		padding-left:0;
+	}
 }
 
 </style>

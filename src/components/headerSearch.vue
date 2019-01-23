@@ -2,17 +2,22 @@
   <div  class="commonHeaderWrap">
     <div class="commonHeader">
       <div class="commonHeaderLeftWrap">
-        logo
+        区块链浏览器
       </div>
       <div class="commonHeaderCenterWrap">
-        <select 
-            v-model="blockchain_select"
-            class="blockchainBrowser_top_select">
-            <option 
-                v-for="(item,index) in lists"
-                :key="index"
-                :value="item.Chainid">{{item.Chainid}}</option>
-        </select>
+      
+				<el-select  
+					v-model="blockchain_select"
+					placeholder="请选择">
+					
+					<el-option
+						v-for="item in lists"
+						:key="item.Chainid"
+						:label="item.Chainid"
+						:value="item.Chainid">
+					</el-option>
+				</el-select>
+			
         <input 
           placeholder="搜索地址/交易ID/区块高度/资产名/资产ID/UTXO"
           v-model="searchText"
@@ -23,14 +28,19 @@
             class="el-icon-search"></span>  
       </div>
       <div class="commonHeaderRightWrap">
-        admin
+        <span>admin</span>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import Vue from 'vue'
+import {  Select, Option  } from 'element-ui';
 
+Vue.use(Select);
+Vue.use(Option);
+	
 export default {
   created(){
     this.getBlockchains();
@@ -90,11 +100,19 @@ export default {
       top:0;
       right:0;
       height:60px;
-      padding:0 20px;
+      padding:0 40px;
       display:flex;
       justify-content: space-between;
       align-items:center;
-      background:#eee;
+      background:$blue;
+			z-index:10;
+			.commonHeaderLeftWrap{
+				padding-right:60px;
+				line-height:36px;
+				border-right:1px solid rgba(255,255,255,.4);
+				color:#fff;
+				font-size:20px;
+			}
       .commonHeaderCenterWrap{
         flex:1;
         margin-left:30px;
@@ -105,18 +123,47 @@ export default {
           width:200px;
         }
         >input{
-          margin-left:20px;
-          flex:1;
-          border:1px solid #ddd;
+          margin-left:7px;
+          border:1px solid rgba(255,255,255,.4);
           padding-left:10px;
+					height:36px;
+					border-radius:5px;
+					width:350px;
+					color:#fff;
+					background:transparent;
         }
+				input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   
+					color: #fff;   
+				}   
+				input:-moz-placeholder, textarea:-moz-placeholder {   
+					color: #fff;   
+				}   
+				input::-moz-placeholder, textarea::-moz-placeholder {   
+					color: #fff;   
+				}   
+				input:-ms-input-placeholder, textarea:-ms-input-placeholder {   
+					color: #fff;   
+				}
+				
         .el-icon-search{
           position:relative;
-          padding:4px 10px;
-          right:32px;
+          padding:9px 10px;
+          right:36px;
+					color:#fff;
+					font-size:16px;
           @include pointer;
         }
       }
+			
+			.commonHeaderRightWrap{
+				span{
+					padding-left:28px;
+					background:url(../assets/defaultAvatar.png) no-repeat left center;
+					color:#fff;
+					line-height:32px;
+				}
+			}
+			
     }
     
   }

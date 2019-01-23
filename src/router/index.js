@@ -28,10 +28,10 @@ const router=new VueRouter({
 	mode:'history',
 	linkActiveClass:'Aactive',
 	routes:[
-		{ 
-			path:'/login',//登录
-			component:Login,
-		},
+// 		{ 
+// 			path:'/login',//登录
+// 			component:Login,
+// 		},
 		{
 			path:'/main',
 			component: resolve => require(['@/pages/main'], resolve),
@@ -138,7 +138,7 @@ const router=new VueRouter({
 		},
 		{
 			path:'',
-			redirect:redirectUrl
+			redirect:'/main'
 		}
 		
 	],

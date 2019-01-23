@@ -9,6 +9,34 @@
 <style lang="scss">
 	@import url("./../css/reset.css");
 	@import url("./../css/common.css");
+	
+	//header样式处理
+	.commonHeaderCenterWrap{
+		.el-select{
+			position:relative;
+			padding-right:7px;
+			input{
+				width:110px;
+			}
+			&:after{
+				content:'';
+				position:absolute;
+				right:0;
+				top:50%;
+				transform: translate(0,-50%);
+				height:36px;
+				border-right:1px solid rgba(255,255,255,.4);
+			}
+		}
+	}
+	//详情标题样式
+	.commonDetailTitle{
+	    font-size:20px;
+		color:#fff;
+		padding:18px 0 12px 22px;
+		background:#b2c4e7;
+	}
+	
 	.blockchainNavWrap{
         display:flex;
         height:80px;
@@ -82,6 +110,10 @@
 			display:flex;
 			justify-content: space-between;
 		}
+		.blockchainBrowser_container_listsWrap1 .el-table th:nth-of-type(4),
+		.blockchainBrowser_container_listsWrap2 .el-table th:nth-of-type(5){
+				padding-left:0;
+		}
     
     
 
@@ -112,6 +144,175 @@
         }
 
     }
+		//区块详情 地址详情样式
+		.adressDetail_addressWrap{
+		   .adressDetail_addressListsWrap{
+				 padding:0 56px 12px;
+				 background:#fff;
+				 .adressDetail_addressListWrap{
+					 display:flex;
+					 border-bottom:1px dashed #e5e2e2;
+					 &:last-of-type{
+						 border-bottom:0 none;
+					 }
+				 }
+			 }
+		    .adressDetail_addressList{
+		        
+						flex:1;
+						line-height:80px;
+						display:flex;
+		        span{
+		            font-size:12px;
+		            color:#333;
+								font-size:14px;
+		            &:nth-of-type(1){
+		                width:142px;
+										text-align:right;
+										color:#666;
+		            }
+								&:nth-of-type(2){
+									flex:1;
+									color:#333;
+									padding-left:50px;
+								}
+		        }
+		    }
+		}
+		.adressDetail_assetsWrap{
+		    padding-top:20px;
+		    .adressDetail_assetsNavWrap{
+		        border-bottom:2px solid #ddd;
+		        display:flex;
+		        >span{
+		            padding-right:50px;
+		            padding-bottom:6px;
+		            &.active{
+		                color:blue;
+		            }
+		        }
+		    }
+		    .adressDetail_assetsDetailWrap{
+		        padding-top:10px;
+		        
+		        .adressDetail_assetsDetailList{
+		            background:#fff;
+								padding:36px 36px 42px;
+								>div{
+									display:flex;
+									border:1px solid #dddddd;
+									font-size:14px;
+									color:#333;
+									&:nth-of-type(1){
+										background:#f7f7f7;
+										line-height:42px;
+									}
+									&:nth-of-type(2){
+										line-height:54px;
+										margin-top:-1px;
+									}
+									>span{
+										flex:1;
+										text-align:center;
+									}
+								}
+		        }
+		    }
+		}
+		
+		.adressDetail_transcationWrap{
+		   
+		    .adressDetail_transcationListWrap{
+		        padding:28px 34px 42px;
+						background:#fff;
+						.adressDetail_transcationList{
+							border:1px solid #ddd;
+							margin-top:-1px;
+							>div{
+								display:flex;
+								font-size:14px;
+								&:nth-of-type(1){
+									padding:0 20px;
+									line-height:42px;
+									border-bottom:1px solid #ddd;
+									.left{
+										display:flex;
+										>span:nth-of-type(1){
+											width:60px;
+											color:#333;
+										}
+										>span:nth-of-type(2){
+											flex:1;
+										}
+									}
+									.right{
+										justify-content: space-between;
+									}
+								}
+								
+								&.list2{
+									padding:19px 14px;
+									align-items: center;
+									.left{
+										display:flex;
+										align-items: center;
+										background:url(../assets/blockchainBrowser/arrow.png) no-repeat right center;
+										>span:nth-of-type(1){
+											width:66px;
+											height:66px;
+											border-radius:5px;
+											font-size:18px;
+											color:#fff;
+											line-height:66px;
+											text-align:center;
+											&.in{
+												background:#29bf37;
+											}
+											&.out{
+												background:#e60012;
+											}
+										}
+										
+										>div{
+											display:flex;
+											align-items: center;
+											>span:nth-of-type(1){
+												width:88px;
+												text-align:right;
+												margin-right:50px;
+												color:#666;
+											}
+											>span:nth-of-type(2){
+												line-height:20px;
+											}
+										}
+									}
+									
+									.right{
+										display:flex;
+										align-items: center;
+										>span:nth-of-type(1){
+											width:68px;
+											color:#666;
+										}
+										>span:nth-of-type(2){
+											line-height:20px;
+										}
+									}
+								}
+								.right{
+									display:flex;
+									margin-left:90px;
+								}
+								
+								>div{
+									flex:1;
+								}
+							}
+						}
+		    }
+		   
+		}
     
 
 </style>

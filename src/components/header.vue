@@ -22,7 +22,7 @@
       top:0;
       right:0;
       height:60px;
-      padding:0 20px;
+      padding:0 40px;
       display:flex;
       justify-content: space-between;
       align-items:center;

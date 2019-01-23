@@ -27,7 +27,7 @@
         </div>
 
         <div class="blockchainBrowser_container_title">最近区块（Latest 10）</div>
-        <div class="blockchainBrowser_container_listsWrap">
+        <div class="blockchainBrowser_container_listsWrap blockchainBrowser_container_listsWrap1">
             <el-table
                 :data="indexInfo.block_list"
                 border
@@ -52,15 +52,20 @@
         </div>
         
 
-        <div class="blockchainBrowser_container_title">最活跃数字资产（Top 10）</div>
-        <div class="blockchainBrowser_container_listsWrap">
+        <div class="blockchainBrowser_container_title blockchainBrowserINdex_container_title">最活跃数字资产（Top 10）<span @click="$router.push({path:'/blockchainBrowser_assetList'})">全部资产</span></div>
+        <div class="blockchainBrowser_container_listsWrap blockchainBrowser_container_listsWrap2">
             <el-table
                 :data="indexInfo.asset_toplist"
                 border
                 style="width: 100%">
                 <el-table-column
-                    prop="assetid"
                     label="资产ID">
+					<template slot-scope="scope">
+						<span 
+							class="blue"
+							@click="$router.push({path:'/blockchainBrowser_assetsDetail',query:{chainid:blockchain_select,searchText:scope.row.assetid}})">{{scope.row.assetid}}</span>
+					</template>
+					
                 </el-table-column>
                 <el-table-column
                     prop="assetname"
@@ -131,7 +136,7 @@ export default {
                 this.goUrlByType(data.data, params)
             },(data)=>{
                 this.$message({
-                    message: data.msg,
+                    message: data && data.msg || '服务器错误',
 					type: 'warning'
                 })
             })
@@ -207,6 +212,22 @@ export default {
 .blockchainBrowser_container_title{
     padding:40px 0 20px 0;
     font-size:20px;
+	&.blockchainBrowserINdex_container_title{
+		display:flex;
+		justify-content: space-between;
+		align-items:center;
+		>span{
+			width: 140px;
+			height: 46px;
+			line-height: 46px;
+			color: #fff;
+			background: #4778c7;
+			border-radius: 5px;
+			font-size: 16px;
+			text-align: center;
+			cursor: pointer;
+		}
+	}
 }
 
 .blockchainBrowser_container_listsWrap{
@@ -224,6 +245,9 @@ export default {
 .blockchainBrowser_container_listsWrap{
 	background:#fff;
 }
+
+
+
 
 
 </style>
