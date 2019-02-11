@@ -3,6 +3,7 @@
     <div class="commonHeader">
       <div class="commonHeaderLeftWrap">
         <!-- logo -->
+				M0运维平台
       </div>
 
       <div class="commonHeaderRightWrap">
@@ -28,6 +29,10 @@
       align-items:center;
       background:$blue;
       z-index:20;
+			.commonHeaderLeftWrap{
+				font-size:20px;
+				color:#fff;
+			}
     }
     .commonHeaderRightWrap{
       span{

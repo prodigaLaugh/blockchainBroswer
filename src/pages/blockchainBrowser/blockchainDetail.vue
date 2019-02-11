@@ -252,7 +252,13 @@ export default {
                     console.log(data,87787)
                 })
         }
-    }
+    },
+		watch:{
+			$route: function (val, oldVal) {
+				this.chainid = this.$route.query.chainid;
+				this.getBlockDetail()
+			},
+		}
 }
 </script>
 

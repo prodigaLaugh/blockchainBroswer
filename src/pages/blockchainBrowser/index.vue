@@ -32,10 +32,13 @@
                 :data="indexInfo.block_list"
                 border
                 style="width: 100%">
-                <el-table-column
-                prop="block_height"
-                label="区块高度">
-                </el-table-column>
+				<el-table-column
+				label="区块高度">
+					<template slot-scope="scope">
+						<div class="cell blue"
+						@click="goNewLinkto('/blockchainBrowser_blockchainDetail',{chainid:blockchain_select,searchText:scope.row.block_height})">{{scope.row.block_height}}</div>
+					</template>
+				</el-table-column>
                 <el-table-column
                 prop="create_time"
                 label="生成时间">
@@ -52,7 +55,7 @@
         </div>
         
 
-        <div class="blockchainBrowser_container_title blockchainBrowserINdex_container_title">最活跃数字资产（Top 10）<span @click="$router.push({path:'/blockchainBrowser_assetList'})">全部资产</span></div>
+        <div class="blockchainBrowser_container_title blockchainBrowserINdex_container_title">最活跃数字资产（Top 10）<span @click="goNewLinkto('/blockchainBrowser_assetList',{})">全部资产</span></div>
         <div class="blockchainBrowser_container_listsWrap blockchainBrowser_container_listsWrap2">
             <el-table
                 :data="indexInfo.asset_toplist"
@@ -63,7 +66,7 @@
 					<template slot-scope="scope">
 						<span 
 							class="blue"
-							@click="$router.push({path:'/blockchainBrowser_assetsDetail',query:{chainid:blockchain_select,searchText:scope.row.assetid}})">{{scope.row.assetid}}</span>
+							@click="goNewLinkto('/blockchainBrowser_assetsDetail',{chainid:blockchain_select,searchText:scope.row.assetid})">{{scope.row.assetid}}</span>
 					</template>
 					
                 </el-table-column>
@@ -85,7 +88,6 @@
                 </el-table-column>
             </el-table>
         </div>
-
 
     </div>
 </template>
@@ -111,11 +113,20 @@ export default {
             searchText:'',
             blockchain_select:'',
             lists:[],
+			
+			newPageLink:'',
 
             indexInfo:{}
         }
     },
     methods:{
+		goNewLinkto(path, query){
+			let routeUrl = this.$router.resolve({
+			  path: path,
+			  query: query
+			});
+			window.open(routeUrl.href, '_blank');
+		},
         search(){
             if(!this.searchText){
                 this.$message({
@@ -128,13 +139,29 @@ export default {
                 chain_name:this.blockchain_select,
                 search:this.searchText.trim()
             }
+			var newTab=window.open('about:blank');
+			
             this.getSearchType(params,(data)=>{
                 let params = {
                     chainid:this.blockchain_select,
                     searchText:this.searchText
                 }
-                this.goUrlByType(data.data, params)
+				
+				var json = {
+					0:'/blockchainBrowser_adressDetail',
+					1:'/blockchainBrowser_assetsDetail',
+					2:'/blockchainBrowser_blockchainDetail',
+					3:'/blockchainBrowser_transactionDetail',
+					4:'/blockchainBrowser_UTXODetail'
+				}
+				let path = json[data.data];
+				this.newPageLink = path + '?chainid=' + this.blockchain_select + '&searchText='+ this.searchText;
+				
+				newTab.location.href = this.newPageLink;
+				
+				
             },(data)=>{
+				newTab.location.href = '/blockchainBrowser_noresult'
                 this.$message({
                     message: data && data.msg || '服务器错误',
 					type: 'warning'
@@ -161,7 +188,8 @@ export default {
 
                 })
         }
-    }
+    },
+	
 }
 </script>
 <style lang="scss" scoped>
@@ -204,7 +232,7 @@ export default {
         line-height:30px;
         border-radius:2px;
         text-align:center;
-        background:#169BD5;
+        background:#4778c7;
         color:#fff;
         @include pointer;
     }

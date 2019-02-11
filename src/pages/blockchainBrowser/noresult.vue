@@ -5,7 +5,7 @@
             <div>无搜索结果</div>
             <div>请输入有效的地址/交易ID/区块高度/资产名/资产ID/UTXO</div>
             <div 
-                @click="$router.go(-1)"
+                @click="$router.push('/main/blockchainBrowser')"
                 class="btn">返回</div>
         </div>
         
@@ -46,7 +46,7 @@ export default {
         &.btn{
             width:100px;
             line-height:30px;
-            background:#f90;
+            background:#4778c7;
             color:#fff;
             text-align:center;
             margin-top:30px;

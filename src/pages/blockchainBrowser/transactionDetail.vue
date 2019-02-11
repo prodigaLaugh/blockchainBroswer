@@ -130,8 +130,13 @@ export default {
         this.getTransactionInfo()
     },
     components: {  
-		myHeader
+			myHeader
     },
+		watch:{
+			$route: function (val, oldVal) {
+				this.getTransactionInfo()
+			},
+		},
     data(){
         return {
             transactionInfo:{},
@@ -280,6 +285,7 @@ export default {
 								padding-left:50px;
 								div{
 									line-height:20px;
+									word-break: break-all;
 								}
             }
         }

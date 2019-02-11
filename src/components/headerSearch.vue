@@ -1,7 +1,10 @@
 <template>
   <div  class="commonHeaderWrap">
     <div class="commonHeader">
-      <div class="commonHeaderLeftWrap">
+      <div 
+				class="commonHeaderLeftWrap"
+				@click="$router.push('/main/blockchainBrowser')"
+				style="cursor:pointer;">
         区块链浏览器
       </div>
       <div class="commonHeaderCenterWrap">

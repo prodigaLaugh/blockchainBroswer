@@ -169,8 +169,13 @@ export default {
         this.getAdressDetail();
     },
     components: {  
-		myHeader
-	},
+			myHeader
+		},
+		watch:{
+			$route:function(){
+				this.getAdressDetail();
+			}
+		},
     data(){
         return {
             adressInfo:{},

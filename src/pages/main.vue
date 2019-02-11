@@ -45,7 +45,7 @@ export default{
         .commLeftArrow{
             width:30px;
             height:100px;
-            background:#779de5 url(../assets/commonLeftArrow.png) no-repeat center;
+            background:#779de5 url(../assets/commonLeftArrow1.png) no-repeat center;
             position:fixed;
             left:140px;
             top:70px;
@@ -54,7 +54,7 @@ export default{
             @include pointer;
             transition:all .5s;
             &.active{
-                background-image:url(../assets/commonLeftArrow1.png);
+                background-image:url(../assets/commonLeftArrow.png);
                 left:0;
             }
         }

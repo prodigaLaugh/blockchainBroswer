@@ -13,36 +13,32 @@
                             <span>ID:</span>
                             <span>{{UTXODetail.utxo_id | operStrNull}}</span>
                         </div>
-                        <div class="UTXODetailWrap_detailLeftListWrap">
-                            <span>所属地址/账户:</span>
-                            <span>
-								
-								<span 
-									v-if="UTXODetail.address_id"
-									classs="blue"
-									@click="$router.push({path:'/blockchainBrowser_adressDetail',query:{chainid:$route.query.chainid,searchText:UTXODetail.address_id}})"
-									class="blue">{{UTXODetail.address_id | interceptStr1}}</span>
-								<span v-else>--</span>
-								
-								<div>
-									(<span>所属账户:</span>
-									{{UTXODetail.account_name | operStrNull}}
-									)
-								</div>
-							</span>
-                        </div>
-                        <div class="UTXODetailWrap_detailLeftListWrap">
-                            <span>资产类型:</span>
-                            <span>
-								<span>{{UTXODetail.asset_name | operStrNull}}</span> 
-								<div>
-									(<span>资产ID</span>：
-									<span 
-										@click="$router.push({path:'/blockchainBrowser_assetsDetail',query:{chainid:$route.query.chainid,searchText:UTXODetail.asset_id}})"
-										class="blue">{{UTXODetail.asset_id | interceptStr1}}</span>)
-								</div>
-							</span>
-                        </div>
+						<div class="UTXODetailWrap_detailLeftListWrap">
+							<span>所属账户:</span>
+							<span>{{UTXODetail.account_name | operStrNull}}</span>
+						</div>
+						<div class="UTXODetailWrap_detailLeftListWrap">
+							<span>所属地址:</span>
+							<span 
+								v-if="UTXODetail.address_id"
+								@click="$router.push({path:'/blockchainBrowser_adressDetail',query:{chainid:$route.query.chainid,searchText:UTXODetail.address_id}})"
+								style="color:#4778c7"
+								class="blue">{{UTXODetail.address_id | interceptStr1}}</span>
+							<span v-else>--</span>
+						</div>
+						
+						<div class="UTXODetailWrap_detailLeftListWrap">
+							<span>资产类型:</span>
+							<span @click="$router.push({path:'/blockchainBrowser_assetsDetail',query:{chainid:$route.query.chainid,searchText:UTXODetail.asset_id}})"
+										class="blue">{{UTXODetail.asset_name | operStrNull}}</span>
+						</div>
+						
+						<div class="UTXODetailWrap_detailLeftListWrap">
+							<span>产生时间:</span>
+							<span>Dec-27-2018 07:08:24 AM +UTC</span>
+						</div>
+						
+                        
                     </div>
                     <div class="UTXODetailWrap_detailRightWrap">
                         <div>额度:</div>
@@ -87,10 +83,55 @@
             <div class="UTXODetailWrap_syWrap">
                 <div class="commonDetailTitle">溯源</div>
                 <div class="UTXODetailWrap_syDetailWrap">
+					<div class="listWrap">
+						<div></div>
+						<div>
+							<div class="listTitle">产生UTXO：</div>
+							<div class="listsWrap right">
+								<div 
+									v-for="(item, index) in UTXODetail.to_utxoid"
+									:key="index"
+									class="blue"
+									@click="goUTXODetail('/blockchainBrowser_UTXODetail',{chainid:$route.query.chainid,searchText:item})">{{item.slice(0,50)}}</div>
+								
+								<span 
+									style="text-align:center;display:block;"
+									v-if="!UTXODetail.to_utxoid||UTXODetail.to_utxoid&&!UTXODetail.to_utxoid.length">--</span>
+							</div>
+						</div>
+					</div>
+					<div class="listWrap">
+						<div>
+							<div 
+								class="listTitle" 
+								style="padding:26px 0 4px;">当前UTXO：</div>
+							<div class="listsWrap center">
+								<div
+									class="blue"
+									style="font-size:18px;"
+									@click="goUTXODetail('/blockchainBrowser_UTXODetail',{chainid:$route.query.chainid,searchText:UTXODetail.utxo_id})">{{UTXODetail.utxo_id}}</div>
+							</div>
+						</div>
+					</div>
+					<div class="listWrap">
+						<div>
+							<div 
+								class="listTitle"
+								style="padding-top:28px;">来源UTXO：</div>
+							<div class="listsWrap left">
+								<div 
+									v-for="(item, index) in UTXODetail.from_utxoid"
+									:key="index"
+									class="blue"
+									@click="goUTXODetail('/blockchainBrowser_UTXODetail',{chainid:$route.query.chainid,searchText:item})">{{item.slice(0,50)}}</div>
+							</div>
+						</div>
+						<div></div>
+					</div>
 
-                    <div class="UTXODetailWrap_syDetailListWrap">
+                    <!-- <div class="UTXODetailWrap_syDetailListWrap">
 						<div class="UTXODetailWrap_syDetailList right">
-							<!-- 可能没有 -->
+							--><!-- 可能没有 --><!--
 							<div 
 								v-for="(item, index) in UTXODetail.to_utxoid"
 								:key="index"
@@ -130,7 +171,7 @@
 							<span class="left">来源UTXO</span>
 						</div>
                         
-                    </div>
+                    </div> -->
 
                 </div>
             </div>
@@ -153,6 +194,11 @@ export default {
     created(){
         this.getInfo()
     },
+	watch:{
+		$route: function (val, oldVal) {
+			this.getInfo()
+		},
+	},
     data(){
         return {
             UTXODetail:{}
@@ -213,8 +259,8 @@ export default {
             &:nth-of-type(1){
                 padding-bottom:8px;
 				width:122px;
-				text-align:right;
 				color:#666;
+				padding-left:20px;
             }
 			&:nth-of-type(2){
 				flex:1;
@@ -307,7 +353,91 @@ export default {
         padding:32px 42px 40px 42px;
         background:#ddd;
 		background:#fff;
-
+		
+		// new style
+		.listWrap{
+			display:flex;
+			>div{
+				flex:1;
+				.listTitle{
+					font-size:20px;
+					color:#333;
+					text-align:center;
+					padding:10px 0;
+				}
+				.listsWrap{
+					line-height:26px;
+					font-size:14px;
+					&.right{
+						>div{
+							padding-left:60px;
+							position:relative;
+							&:before,
+							&:after{
+								position:absolute;
+								content:'';
+								background:#4778c7;
+								left:0;
+							}
+							&:before{
+								width:1px;
+								height:calc(100% + 10px);
+								top:50%;
+								
+							}
+							&:after{
+								width:40px;
+								height:1px;
+								top:50%;
+								transform: translate(0,-50%);
+							}
+							&:last-of-type{
+								margin-bottom:15px;
+							}
+						}
+					}
+					&.center{
+						text-align:center;
+					}
+					
+					&.left{
+						>div{
+							padding-right:60px;
+							position:relative;
+							text-align:right;
+							&:before,
+							&:after{
+								position:absolute;
+								content:'';
+								background:#4778c7;
+								right:0;
+							}
+							&:before{
+								width:1px;
+								height:calc(100% + 32px);
+								bottom:50%;
+								
+							}
+							&:after{
+								width:40px;
+								height:1px;
+								top:50%;
+								transform: translate(0,-50%);
+							}
+							&:last-of-type{
+								margin-bottom:15px;
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		
+		
+		
+		
+		// old style
         .UTXODetailWrap_syDetailListWrap{
 			display:flex;
 			position:relative;
