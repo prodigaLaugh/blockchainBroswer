@@ -108,7 +108,7 @@
 							<div class="listsWrap center">
 								<div
 									class="blue"
-									style="font-size:18px;"
+									style="font-weight: bold;"
 									@click="goUTXODetail('/blockchainBrowser_UTXODetail',{chainid:$route.query.chainid,searchText:UTXODetail.utxo_id})">{{UTXODetail.utxo_id}}</div>
 							</div>
 						</div>

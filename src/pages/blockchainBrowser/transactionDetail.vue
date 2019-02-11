@@ -2,6 +2,7 @@
     <div class="transactionDetainWrap">
         <my-header/>
         <div class="detailOuterWrap transactionDetainWrap_assetsWrap">
+					<div class="commonDetailTitle">交易详情</div>
             <div class="transactionDetainWrap_assetsTitle">
                 <span>交易:</span>
                 <span>{{transactionInfo.tx_id}}</span>
