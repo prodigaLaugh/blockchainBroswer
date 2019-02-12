@@ -31,10 +31,14 @@
 	}
 	//详情标题样式
 	.commonDetailTitle{
-	    font-size:20px;
+	    font-size:16px;
 		color:#fff;
 		padding:18px 0 12px 22px;
 		background:#b2c4e7;
+	}
+	.detail_commonTitle{
+		font-size:24px;
+		padding:20px 0 30px;
 	}
 	
 	.blockchainNavWrap{
@@ -147,7 +151,7 @@
 		//区块详情 地址详情样式
 		.adressDetail_addressWrap{
 		   .adressDetail_addressListsWrap{
-				 padding:0 56px 12px;
+				 padding:0 34px 12px;
 				 background:#fff;
 				 .adressDetail_addressListWrap{
 					 display:flex;
@@ -160,7 +164,7 @@
 		    .adressDetail_addressList{
 		        
 						flex:1;
-						line-height:80px;
+						line-height:56px;
 						display:flex;
 		        span{
 		            font-size:12px;
@@ -168,8 +172,8 @@
 								font-size:14px;
 		            &:nth-of-type(1){
 		                width:142px;
-										text-align:right;
 										color:#666;
+										padding-left:20px;
 		            }
 								&:nth-of-type(2){
 									flex:1;
@@ -223,7 +227,7 @@
 		.adressDetail_transcationWrap{
 		   
 		    .adressDetail_transcationListWrap{
-		        padding:28px 34px 42px;
+		        padding:15px 34px 16px;
 						background:#fff;
 						.adressDetail_transcationList{
 							border:1px solid #ddd;

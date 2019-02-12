@@ -2,61 +2,62 @@
     <div class="adressDetail_wrap">
         <my-header/>
         <div class="detailOuterWrap adressDetail_containerWrap">
+						<div class="detail_commonTitle">区块详情</div>
             <div class="adressDetail_addressWrap">
 							<div class="commonDetailTitle">区块{{blockInfo.block_height}}</div>
                 <div class="adressDetail_addressListsWrap">
 									
 									<div class="adressDetail_addressListWrap">
 										<div class="adressDetail_addressList">
-												<span>区块链:</span>
+												<span>区块链</span>
 												<span>{{chainid}} </span>
 										</div>
 										<div class="adressDetail_addressList">
-												<span>出块节点:</span>
+												<span>出块节点</span>
 												<span>{{blockInfo.propose_nodename}}</span>
 										</div>
 									</div>
 									
 									<div class="adressDetail_addressListWrap">
 										<div class="adressDetail_addressList">
-												<span>包含交易数:</span>
+												<span>包含交易数</span>
 												<span>{{blockInfo.tx_total}} </span>
 										</div>
 										<div class="adressDetail_addressList">
-												<span>出块耗时:</span>
+												<span>出块耗时</span>
 												<span>{{blockInfo.createblock_time}}</span>
 										</div>
 									</div>
 									
 									<div class="adressDetail_addressListWrap">
 										<div class="adressDetail_addressList">
-												<span>区块高度:</span>
+												<span>区块高度</span>
 												<span>{{blockInfo.block_height}} </span>
 										</div>
 										<div class="adressDetail_addressList">
-												<span>上个块:</span>
+												<span>上个块</span>
 												<span>{{blockInfo.preblock_height}}</span>
 										</div>
 									</div>
 									
 									<div class="adressDetail_addressListWrap">
 										<div class="adressDetail_addressList">
-												<span>出块时间:</span>
+												<span>出块时间</span>
 												<span>{{blockInfo.block_time | timestampToTime}} </span>
 										</div>
 										<div class="adressDetail_addressList">
-												<span>下个块:</span>
+												<span>下个块</span>
 												<span>{{blockInfo.nextblock_height}}</span>
 										</div>
 									</div>
 									
 									<div class="adressDetail_addressListWrap">
 										<div class="adressDetail_addressList">
-												<span>块哈希:</span>
+												<span>块哈希</span>
 												<span>{{blockInfo.block_hash | interceptStr1}} </span>
 										</div>
 										<div class="adressDetail_addressList">
-												<span>块大小(kB):</span>
+												<span>块大小(KB)</span>
 												<span>{{blockInfo.block_size}}</span>
 										</div>
 									</div>

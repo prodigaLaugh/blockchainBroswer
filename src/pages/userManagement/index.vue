@@ -4,7 +4,8 @@
 				<div class="containerTopTitle">用户管理</div>
 				
 				<div class="blockManagement_TopTile">
-						<span @click="deployFlag=true">+用户</span>
+						<div>用户列表</div>
+						<span @click="deployFlag=true">添加用户</span>
 				</div>
 
         <div class="blockMangement_listsWrap">

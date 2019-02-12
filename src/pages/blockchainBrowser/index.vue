@@ -245,13 +245,13 @@ export default {
 		justify-content: space-between;
 		align-items:center;
 		>span{
-			width: 140px;
-			height: 46px;
-			line-height: 46px;
+			width: 110px;
+			height: 38px;
+			line-height: 38px;
 			color: #fff;
 			background: #4778c7;
 			border-radius: 5px;
-			font-size: 16px;
+			font-size: 14px;
 			text-align: center;
 			cursor: pointer;
 		}

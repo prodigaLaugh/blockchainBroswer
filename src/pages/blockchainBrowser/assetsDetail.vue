@@ -2,35 +2,36 @@
     <div class="adressDetail_wrap">
         <my-header/>
         <div class="detailOuterWrap adressDetail_containerWrap">
+						<div class="detail_commonTitle">资产详情</div>
             <div class="adressDetail_addressWrap">
 								<div class="commonDetailTitle">资产概况</div>
                 <div class="adressDetail_addressListsWrap">
 									
 									<div class="adressDetail_addressListWrap">
 										<div class="adressDetail_addressList">
-												<span>资产名称:</span>
+												<span>资产名称</span>
 												<span>{{assetInfo.asset_name | operStrNull}} </span>
 										</div>
 										<div class="adressDetail_addressList">
-												<span>发行总量:</span>
+												<span>发行总量</span>
 												<span>{{assetInfo.issue_amount}}</span>
 										</div>
 									</div>
 									
 									<div class="adressDetail_addressListWrap">
 										<div class="adressDetail_addressList">
-												<span>总持有者:</span>
+												<span>总持有者</span>
 												<span>{{assetInfo.holder_total}} </span>
 										</div>
 										<div class="adressDetail_addressList">
-												<span>资产交易量:</span>
+												<span>资产交易量</span>
 												<span>{{assetInfo.asset_txtotal}}</span>
 										</div>
 									</div>
 									
 									<div class="adressDetail_addressListWrap">
 										<div class="adressDetail_addressList">
-												<span>创建时间:</span>
+												<span>创建时间</span>
 												<span>{{assetInfo.create_time}} </span>
 										</div>
 										<div class="adressDetail_addressList">

@@ -1,12 +1,14 @@
 <template>
     <div class="transactionDetainWrap">
         <my-header/>
+				
         <div class="detailOuterWrap transactionDetainWrap_assetsWrap">
-					<div class="commonDetailTitle">交易详情</div>
-            <div class="transactionDetainWrap_assetsTitle">
-                <span>交易:</span>
-                <span>{{transactionInfo.tx_id}}</span>
-            </div>
+					<div class="detail_commonTitle">交易详情</div>
+					<div class="commonDetailTitle">交易:{{transactionInfo.tx_id}}</div>
+           <!-- <div class="transactionDetainWrap_assetsTitle">
+                <span></span>
+                <span></span>
+            </div> -->
 
             <div class="transactionDetainWrap_assetsDetailWrap">
                 <div class="transactionDetainWrap_assetDetailListWrap">
@@ -48,8 +50,12 @@
                     :key="index"
                     class="transactionDetainWrap_assetListWrap">
 										<div class="transactionDetainWrap_assetListRightWrap">
-												<span>{{item.asset_name||'--'}}</span>
+												<!-- <span>{{item.asset_name||'--'}}</span> -->
 												<div class="listWrap">
+													<div>
+															<span>资产类型:</span>
+															<i>{{item.asset_name||'--'}}</i>
+													</div>
 														<div>
 																<span>入账金额:</span>
 																<i>{{item.from_amount}}</i>
@@ -67,10 +73,10 @@
 										</div>
 										
                     <div class="transactionDetainWrap_assetListLeftWrap">
-                        <div class="transactionDetainWrap_assetListLeftTop">
+                        <!-- <div class="transactionDetainWrap_assetListLeftTop">
                             <span>交易ID:</span>
                             <span>{{item.tx_id}}</span>
-                        </div>
+                        </div> -->
                         <div class="transactionDetainWrap_assetListLeftFromWrap">
                             <div class="transactionDetainWrap_assetListLeftFrom">
                                 <span>从:</span>
@@ -108,6 +114,7 @@
 																			@click="$router.push({path:'/blockchainBrowser_UTXODetail',query:{chainid:$route.query.chainid,searchText:list}})">{{list | interceptStr1}}</span>
                                 </div>
 																<div v-if="!item.fromaddress_utxo.lists">--</div>
+																
 															
                             </div>
                         </div>
@@ -201,12 +208,12 @@ export default {
 .transactionDetainWrap_assetsDetailWrap{
     display:flex;
     align-items: center;
-		padding:0 56px;
+		padding:0 40px;
 		background:#fff;
 
     .transactionDetainWrap_assetDetailListWrap{
         flex:1;
-				line-height:80px;
+				line-height:56px;
         >div{
             display:flex;
 						border-bottom:1px dashed #ddd;
@@ -218,7 +225,7 @@ export default {
                 &:nth-of-type(1){
                     width:144px;
 										color:#666;
-										text-align:right;
+										padding-left:20px;
                 }
 								&:nth-of-type(2){
 										flex:1;
@@ -240,6 +247,7 @@ export default {
     display:flex;
     justify-content: space-between;
     margin-bottom:20px;
+		border-top:1px solid #ddd;
     .transactionDetainWrap_assetListLeftWrap{
         flex:1;
 				border:1px solid #ddd;
@@ -339,6 +347,11 @@ export default {
 
     .transactionDetainWrap_assetListRightWrap{
 			width:244px;
+			border:1px solid #ddd;
+			margin-top:-1px;
+			display:flex;
+			align-content: center;
+			align-items: center;
 			>span{
 				line-height:44px;
 				color:#fff;
@@ -348,31 +361,36 @@ export default {
 				text-align:center;
 			}
 			.listWrap{
-				border:1px solid #ddd;
+				
 				border-top:0 none;
 				padding:30px 0;
 				>div{
-					height:70px;
+					height:40px;
 					display:flex;
-					flex-direction: column;
-					justify-content: center;
-					padding-left:70px;
 					font-size:14px;
-					background:url(../../assets/blockchainBrowser/transaDetailIcon1.png) no-repeat 20px center;
+					
+					align-items: center;
+					padding-left:20px;
+// 					flex-direction: column;
+// 					justify-content: center;
+					// padding-left:70px;
+					
+					// background:url(../../assets/blockchainBrowser/transaDetailIcon1.png) no-repeat 20px center;
 					span{
 						color:#666;
 					}
 					i{
 						color:#333;
-						padding-top:10px;
+						// padding-top:10px;
+						padding-left:4px;
 					}
 					
-					&:nth-of-type(2){
-							background-image:url(../../assets/blockchainBrowser/transaDetailIcon2.png);
-					}
-					&:nth-of-type(3){
-							background-image:url(../../assets/blockchainBrowser/transaDetailIcon3.png);
-					}
+// 					&:nth-of-type(2){
+// 							background-image:url(../../assets/blockchainBrowser/transaDetailIcon2.png);
+// 					}
+// 					&:nth-of-type(3){
+// 							background-image:url(../../assets/blockchainBrowser/transaDetailIcon3.png);
+// 					}
 			}
 			
 				

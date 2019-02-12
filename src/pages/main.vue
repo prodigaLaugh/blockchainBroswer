@@ -43,9 +43,10 @@ export default{
     .content_outer_wrap{
         height:100%;
         .commLeftArrow{
-            width:30px;
-            height:100px;
+            width:20px;
+            height:68px;
             background:#779de5 url(../assets/commonLeftArrow1.png) no-repeat center;
+						background-size:8px 11px;
             position:fixed;
             left:140px;
             top:70px;
@@ -80,20 +81,26 @@ export default{
 .blockchainManagement{
     .blockManagement_TopTile{
         display:flex;
-        justify-content: flex-end;
+        justify-content: space-between;
         padding:26px 38px 24px 0;
         align-items: center;
         background:#fff;
+				div{
+					font-size:20px;
+					color:#333;
+					padding-left:32px;
+				}
         >span{
-            width:140px;
-            height:46px;
-            line-height:46px;
+            width: 110px;
+            height: 38px;
+            line-height: 38px;
             color:#fff;
             background:$blue;
             border-radius:5px;
-            font-size:16px;
+            font-size:14px;
             text-align:center;
             @include pointer;
+						
         }
 
     }

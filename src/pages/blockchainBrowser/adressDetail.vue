@@ -2,34 +2,35 @@
     <div class="adressDetail_wrap">
         <my-header/>
         <div class="detailOuterWrap adressDetail_containerWrap">
+						<div class="detail_commonTitle">地址详情</div>
             <div class="adressDetail_addressWrap">
                 <div class="commonDetailTitle">地址概况</div>
                 <div class="adressDetail_addressListsWrap">
 									<div class="adressDetail_addressListWrap">
 										<div class="adressDetail_addressList">
-												<span>地址:</span>
+												<span>地址</span>
 												<span>{{adressInfo.address_id}} </span>
 										</div>
 										<div class="adressDetail_addressList">
-												<span>交易总数:</span>
+												<span>交易总数</span>
 												<span>{{adressInfo.tx_total}} </span>
 										</div>
 									</div>
 									
 									<div class="adressDetail_addressListWrap">
 										<div class="adressDetail_addressList">
-												<span>转账交易:</span>
+												<span>转账交易</span>
 												<span>{{adressInfo.to_txtotal}} </span>
 										</div>
 										<div class="adressDetail_addressList">
-												<span>接收交易:</span>
+												<span>接收交易</span>
 												<span>{{adressInfo.from_txtotal}} </span>
 										</div>
 									</div>
 									
 									<div class="adressDetail_addressListWrap">
 										<div class="adressDetail_addressList">
-												<span>持有资产类型:</span>
+												<span>持有资产类型</span>
 												<span>{{assetsLists.length}} </span>
 										</div>
 										<div>

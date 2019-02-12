@@ -6,6 +6,7 @@
 				<div class="containerTopTitle">服务器管理</div>
 				
 				<div class="blockManagement_TopTile">
+						<div>服务器列表</div>
 						<span @click="deployFlag=true">+添加服务器</span>
 				</div>
 				

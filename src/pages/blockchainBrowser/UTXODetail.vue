@@ -4,21 +4,23 @@
         
         <div class="detailOuterWrap">
 
-        
+			<div class="detail_commonTitle">UTXO详情</div>
             <div class="UTXODetail_detailOutersWrap">
                 <div class="commonDetailTitle">UTXO</div>
                 <div class="UTXODetail_detailWrap">
                     <div class="UTXODetailWrap_detailLeftWrap">
-                        <div class="UTXODetailWrap_detailLeftListWrap">
-                            <span>ID:</span>
+                        <div 
+							style="padding-top:20px;"
+							class="UTXODetailWrap_detailLeftListWrap">
+                            <span>ID</span>
                             <span>{{UTXODetail.utxo_id | operStrNull}}</span>
                         </div>
 						<div class="UTXODetailWrap_detailLeftListWrap">
-							<span>所属账户:</span>
+							<span>所属账户</span>
 							<span>{{UTXODetail.account_name | operStrNull}}</span>
 						</div>
 						<div class="UTXODetailWrap_detailLeftListWrap">
-							<span>所属地址:</span>
+							<span>所属地址</span>
 							<span 
 								v-if="UTXODetail.address_id"
 								@click="$router.push({path:'/blockchainBrowser_adressDetail',query:{chainid:$route.query.chainid,searchText:UTXODetail.address_id}})"
@@ -28,13 +30,13 @@
 						</div>
 						
 						<div class="UTXODetailWrap_detailLeftListWrap">
-							<span>资产类型:</span>
+							<span>资产类型</span>
 							<span @click="$router.push({path:'/blockchainBrowser_assetsDetail',query:{chainid:$route.query.chainid,searchText:UTXODetail.asset_id}})"
 										class="blue">{{UTXODetail.asset_name | operStrNull}}</span>
 						</div>
 						
 						<div class="UTXODetailWrap_detailLeftListWrap">
-							<span>产生时间:</span>
+							<span>产生时间</span>
 							<span>Dec-27-2018 07:08:24 AM +UTC</span>
 						</div>
 						
@@ -120,10 +122,14 @@
 								style="padding-top:28px;">来源UTXO：</div>
 							<div class="listsWrap left">
 								<div 
+									v-if="UTXODetail.from_utxoid&&UTXODetail.from_utxoid.length"
 									v-for="(item, index) in UTXODetail.from_utxoid"
 									:key="index"
 									class="blue"
 									@click="goUTXODetail('/blockchainBrowser_UTXODetail',{chainid:$route.query.chainid,searchText:item})">{{item.slice(0,50)}}</div>
+								<span 
+									v-if="!UTXODetail.from_utxoid||!UTXODetail.from_utxoid.length"
+									style="display:block;text-align:center;">--</span>
 							</div>
 						</div>
 						<div></div>
@@ -241,14 +247,13 @@ export default {
 	background:#fff;
 	.UTXODetailWrap_detailLeftWrap{
 		flex:1;
-		padding-bottom:28px;
+		padding-bottom:16px;
 	}
     .UTXODetailWrap_detailLeftListWrap{
 		border-bottom:1px dashed #e5e2e2;
 		display:flex;
 		flex-direction: row;
 		line-height:46px;
-		padding-top:16px;
 		margin-right:40px;
 		&:last-of-type{
 			border-bottom:0;
@@ -257,7 +262,6 @@ export default {
 			font-size:14px;
 			
             &:nth-of-type(1){
-                padding-bottom:8px;
 				width:122px;
 				color:#666;
 				padding-left:20px;
@@ -284,6 +288,7 @@ export default {
         justify-content: center;
 		padding-left:182px;
         background:url(../../assets/blockchainBrowser/utxoAssetIcon.png) no-repeat 30px center;
+		background-size:100px;
 		border-left:1px dashed $blue;
         >div{
             &:nth-of-type(1){

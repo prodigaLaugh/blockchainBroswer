@@ -4,6 +4,7 @@
 				<div class="containerTopTitle">节点管理</div>
 				
 				<div class="blockManagement_TopTile">
+						<div>节点列表</div>
 						<span @click="deployFlag=true">+部署节点</span>
 				</div>
         <div class="blockMangement_listsWrap">
