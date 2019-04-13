@@ -3,8 +3,8 @@
         <my-header/>
 				
         <div class="detailOuterWrap transactionDetainWrap_assetsWrap">
-					<div class="detail_commonTitle">交易详情</div>
-					<div class="commonDetailTitle">交易:{{transactionInfo.tx_id}}</div>
+			<div class="detail_commonTitle">交易详情</div>
+			<div class="commonDetailTitle">交易:{{transactionInfo.tx_id}}</div>
            <!-- <div class="transactionDetainWrap_assetsTitle">
                 <span></span>
                 <span></span>
@@ -49,28 +49,28 @@
                     v-for="(item, index) in transactionInfo.assetinfo_list"
                     :key="index"
                     class="transactionDetainWrap_assetListWrap">
-										<div class="transactionDetainWrap_assetListRightWrap">
-												<!-- <span>{{item.asset_name||'--'}}</span> -->
-												<div class="listWrap">
-													<div>
-															<span>资产类型:</span>
-															<i>{{item.asset_name||'--'}}</i>
-													</div>
-														<div>
-																<span>入账金额:</span>
-																<i>{{item.from_amount}}</i>
-														</div>
-														<div>
-																<span>找零金额:</span>
-																<i>{{item.change}}</i>
-														</div>
-														<div>
-																<span>实际到账:</span>
-																<i>{{item.to_amount}}</i>
-														</div>
-												</div>
-												
-										</div>
+					<div class="transactionDetainWrap_assetListRightWrap">
+							<!-- <span>{{item.asset_name||'--'}}</span> -->
+						<div class="listWrap">
+							<div>
+								<span>资产类型:</span>
+								<i>{{item.asset_name||'--'}}</i>
+							</div>
+							<div>
+								<span>入账金额:</span>
+								<i>{{item.from_amount}}</i>
+							</div>
+							<div>
+								<span>找零金额:</span>
+								<i>{{item.change}}</i>
+							</div>
+							<div>
+								<span>实际到账:</span>
+								<i>{{item.to_amount}}</i>
+							</div>
+						</div>
+					
+					</div>
 										
                     <div class="transactionDetainWrap_assetListLeftWrap">
                         <!-- <div class="transactionDetainWrap_assetListLeftTop">
@@ -78,25 +78,25 @@
                             <span>{{item.tx_id}}</span>
                         </div> -->
                         <div class="transactionDetainWrap_assetListLeftFromWrap">
-                            <div class="transactionDetainWrap_assetListLeftFrom">
-                                <span>从:</span>
-                                <span
-																	class="blue"
-																	v-if="item.fromaddress_utxo.from"
-																	@click="$router.push({path:'/blockchainBrowser_adressDetail',query:{chainid:$route.query.chainid,searchText:item.fromaddress_utxo.from}})">{{item.fromaddress_utxo.from | interceptStr1}}</span>
-																	<span v-if="!item.fromaddress_utxo.from">--</span>
-                            </div>
-                            <div class="transactionDetainWrap_assetListCenterWrap">
-                                <span></span>
-                            </div>
+							<div class="transactionDetainWrap_assetListLeftFrom">
+								<span>从:</span>
+								<span
+									class="blue"
+									v-if="item.fromaddress_utxo.from"
+									@click="$router.push({path:'/blockchainBrowser_adressDetail',query:{chainid:$route.query.chainid,searchText:item.fromaddress_utxo.from}})">{{item.fromaddress_utxo.from | interceptStr1}}</span>
+								<span v-if="!item.fromaddress_utxo.from">--</span>
+							</div>
+							<div class="transactionDetainWrap_assetListCenterWrap">
+								<span></span>
+							</div>
                             <div  class="transactionDetainWrap_assetListLeftFrom">
                                 <span>到:</span>
                                 <span>
                                     <div 
                                         v-for="(list,i) in item.to_address"
                                         :key="i"
-																				@click="$router.push({path:'/blockchainBrowser_adressDetail',query:{chainid:$route.query.chainid,searchText:list}})"
-																				class="blue">{{list | interceptStr1}}</div>
+										@click="$router.push({path:'/blockchainBrowser_adressDetail',query:{chainid:$route.query.chainid,searchText:list}})"
+										class="blue">{{list | interceptStr2}}</div>
                                 </span>
                             </div>
                         </div>
@@ -110,10 +110,10 @@
                                     :key="i">
                                     <span></span>
                                     <span
-																			class="blue"
-																			@click="$router.push({path:'/blockchainBrowser_UTXODetail',query:{chainid:$route.query.chainid,searchText:list}})">{{list | interceptStr1}}</span>
+										class="blue"
+										@click="$router.push({path:'/blockchainBrowser_UTXODetail',query:{chainid:$route.query.chainid,searchText:list}})">{{list | interceptStr1}}</span>
                                 </div>
-																<div v-if="!item.fromaddress_utxo.lists">--</div>
+								<div v-if="!item.fromaddress_utxo.lists">--</div>
 																
 															
                             </div>

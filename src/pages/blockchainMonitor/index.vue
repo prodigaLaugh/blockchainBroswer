@@ -14,13 +14,13 @@
 
         <div class="blockchainNavWrap">
             <span 
-                @click="navIndex = 0"
+                @click="changeNav(0)"
                 :class="{active:navIndex === 0}">网络概览</span>
             <span 
-                @click="navIndex = 1"
+                @click="changeNav(1)"
                 :class="{active:navIndex === 1}">资产监控</span>
             <span 
-                @click="navIndex = 2"
+                @click="changeNav(2)"
                 :class="{active:navIndex === 2}">节点监控</span>
 
         </div>
@@ -57,6 +57,9 @@ export default {
         nodeMonitor
     },
     created(){
+		this.navIndex = localStorage.blockchainMoNavIndex 
+					? localStorage.blockchainMoNavIndex - 0
+					:0;
         this.getBlockchains()
     },
     data(){
@@ -68,6 +71,10 @@ export default {
         }
     },
     methods:{
+		changeNav(index){
+			this.navIndex = index;
+			localStorage.blockchainMoNavIndex = index;
+		},
         getBlockchains(){
             this.getBlockchainLists((data)=>{
                 this.blockchainLists = data.data;
@@ -77,6 +84,7 @@ export default {
             })
         },
     }
+	
 }
 </script>
 

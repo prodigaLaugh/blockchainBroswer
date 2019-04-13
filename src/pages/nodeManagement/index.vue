@@ -1,12 +1,12 @@
 <template>
     <div class="outer_wrap blockchainManagement">
    
-				<div class="containerTopTitle">节点管理</div>
-				
-				<div class="blockManagement_TopTile">
-						<div>节点列表</div>
-						<span @click="deployFlag=true">+部署节点</span>
-				</div>
+		<div class="containerTopTitle">节点管理</div>
+		
+		<div class="blockManagement_TopTile">
+			<div>节点列表</div>
+			<span @click="deployFlag=true">+部署节点</span>
+		</div>
         <div class="blockMangement_listsWrap">
             <el-table
                 :data="tableData"
@@ -62,7 +62,6 @@
 
         <el-dialog title="添加节点" :visible.sync="deployFlag">
             <div class="deployContainerWrap">
-
 
 
                 <div class="deployContainerListWrap">
@@ -153,7 +152,7 @@ Vue.use(TableColumn);
 
 export default {
     created(){
-
+		localStorage.removeItem('blockchainMoNavIndex');
     },
     components: {  
       

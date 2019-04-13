@@ -2,43 +2,43 @@
     <div class="adressDetail_wrap">
         <my-header/>
         <div class="detailOuterWrap adressDetail_containerWrap">
-						<div class="detail_commonTitle">地址详情</div>
+			<div class="detail_commonTitle">地址详情</div>
             <div class="adressDetail_addressWrap">
                 <div class="commonDetailTitle">地址概况</div>
                 <div class="adressDetail_addressListsWrap">
-									<div class="adressDetail_addressListWrap">
-										<div class="adressDetail_addressList">
-												<span>地址</span>
-												<span>{{adressInfo.address_id}} </span>
-										</div>
-										<div class="adressDetail_addressList">
-												<span>交易总数</span>
-												<span>{{adressInfo.tx_total}} </span>
-										</div>
-									</div>
+					<div class="adressDetail_addressListWrap">
+						<div class="adressDetail_addressList">
+								<span>地址</span>
+								<span>{{adressInfo.address_id | interceptStr1}} </span>
+						</div>
+						<div class="adressDetail_addressList">
+								<span>交易总数</span>
+								<span>{{adressInfo.tx_total}} </span>
+						</div>
+					</div>
 									
-									<div class="adressDetail_addressListWrap">
-										<div class="adressDetail_addressList">
-												<span>转账交易</span>
-												<span>{{adressInfo.to_txtotal}} </span>
-										</div>
-										<div class="adressDetail_addressList">
-												<span>接收交易</span>
-												<span>{{adressInfo.from_txtotal}} </span>
-										</div>
-									</div>
+					<div class="adressDetail_addressListWrap">
+						<div class="adressDetail_addressList">
+								<span>转账交易</span>
+								<span>{{adressInfo.to_txtotal}} </span>
+						</div>
+						<div class="adressDetail_addressList">
+								<span>接收交易</span>
+								<span>{{adressInfo.from_txtotal}} </span>
+						</div>
+					</div>
 									
-									<div class="adressDetail_addressListWrap">
-										<div class="adressDetail_addressList">
-												<span>持有资产类型</span>
-												<span>{{assetsLists.length}} </span>
-										</div>
-										<div>
-											<span>&nbsp;</span>
-											<span>&nbsp;</span>
-										</div>
-										
-									</div>
+					<div class="adressDetail_addressListWrap">
+						<div class="adressDetail_addressList">
+								<span>持有资产类型</span>
+								<span>{{assetsLists.length}} </span>
+						</div>
+						<div>
+							<span>&nbsp;</span>
+							<span>&nbsp;</span>
+						</div>
+						
+					</div>
                     
              
                 </div>
@@ -54,19 +54,19 @@
                 <div class="adressDetail_assetsDetailWrap">
                     <div class="commonDetailTitle">资产概况</div>
                     <div class="adressDetail_assetsDetailList">
-											<div>
-												<span>当前余额</span>
-												<span>交易次数</span>
-												<span>转账交易</span>
-												<span>接收交易</span>
-											</div>
-											<div>
-												<span>{{assetsLists[assetIndex].balance}}</span>
-												<span>{{assetsLists[assetIndex].tx_sums}}</span>
-												<span>{{assetsLists[assetIndex].from_txsums}}</span>
-												<span>{{assetsLists[assetIndex].to_txsums}}</span>
-											</div>
-										</div>
+						<div>
+							<span>当前余额</span>
+							<span>交易次数</span>
+							<span>转账交易</span>
+							<span>接收交易</span>
+						</div>
+						<div>
+							<span>{{assetsLists[assetIndex].balance}}</span>
+							<span>{{assetsLists[assetIndex].tx_sums}}</span>
+							<span>{{assetsLists[assetIndex].from_txsums}}</span>
+							<span>{{assetsLists[assetIndex].to_txsums}}</span>
+						</div>
+					</div>
 
                 </div>
             </div>
@@ -79,59 +79,59 @@
                         v-for="(item,index) in transactionLists"
                         :key="index"
                         class="adressDetail_transcationListWrap">
-												<div class="adressDetail_transcationList">
-													<div class="list1">
-														<div class="left">
-															<span>交易ID:</span>
-															<span
-																class="blue"
-																@click="$router.push({path:'/blockchainBrowser_transactionDetail',query:{chainid:$route.query.chainid,searchText:item.tx_id}})">{{item.tx_id | interceptStr1}}</span>
-														</div>
-														<div class="right">
-															<div>
-																<span>余额:</span>
-																<span>{{item.asset_amount}}</span>
-															</div>
-															<div>
-																<span>到账时间</span>
-																<span>{{item.block_time}}</span>
-															</div>
-														</div>
-													</div>
+						<div class="adressDetail_transcationList">
+							<div class="list1">
+								<div class="left">
+									<span>交易ID:</span>
+									<span
+										class="blue"
+										@click="$router.push({path:'/blockchainBrowser_transactionDetail',query:{chainid:$route.query.chainid,searchText:item.tx_id}})">{{item.tx_id | interceptStr1}}</span>
+								</div>
+								<div class="right">
+									<div>
+										<span>余额:</span>
+										<span>{{item.asset_amount}}</span>
+									</div>
+									<div>
+										<span>到账时间</span>
+										<span>{{item.block_time}}</span>
+									</div>
+								</div>
+							</div>
 													
-													<div class="list2">
-														<div class="left">
-															<span :class="{in:item.type==='IN',out:item.type==='OUT'}">{{item.type}}</span>
-															<div>
-																<span>从:</span>
-																<span>
-																	<div
-																			v-for="(list,i) in item.from_address"
-																			:key="i"
-																			class="blue"
-																			@click="$router.push({path:'/blockchainBrowser_adressDetail',query:{chainid:$route.query.chainid,searchText:list}})">
-																			{{list | interceptStr1}}
-																	</div>
-																	<div v-if="!item.from_address.length">--</div>
-																	
-																</span>
-															</div>
-														</div>
-														<div class="right">
-															<span>到</span>
-															<span>
-																<div
-																		v-for="(list,i) in item.to_address"
-																		:key="i"
-																		class="blue"
-																		@click="$router.push({path:'/blockchainBrowser_adressDetail',query:{chainid:$route.query.chainid,searchText:list}})">{{list | interceptStr1}}</div>
-																<div v-if="!item.to_address.length">--</div>
-																		
-															</span>
-														</div>
-													</div>
-													
-												</div>
+							<div class="list2">
+								<div class="left">
+									<span :class="{in:item.type==='IN',out:item.type==='OUT'}">{{item.type}}</span>
+									<div>
+										<span>从:</span>
+										<span>
+											<div
+													v-for="(list,i) in item.from_address"
+													:key="i"
+													class="blue"
+													@click="$router.push({path:'/blockchainBrowser_adressDetail',query:{chainid:$route.query.chainid,searchText:list}})">
+													{{list | interceptStr1}}
+											</div>
+											<div v-if="!item.from_address.length">--</div>
+											
+										</span>
+									</div>
+								</div>
+								<div class="right">
+									<span>到</span>
+									<span>
+										<div
+												v-for="(list,i) in item.to_address"
+												:key="i"
+												class="blue"
+												@click="$router.push({path:'/blockchainBrowser_adressDetail',query:{chainid:$route.query.chainid,searchText:list}})">{{list | interceptStr1}}</div>
+										<div v-if="!item.to_address.length">--</div>
+												
+									</span>
+								</div>
+							</div>
+							
+						</div>
 
                     </div>
 

@@ -5,7 +5,7 @@
         <div class="containerTopTitle">区块链管理</div>
 
         <div class="blockManagement_TopTile">
-						<div>区块链列表</div>
+			<div>区块链列表</div>
             <span @click="deployFlag=true">+部署区块链</span>
         </div>
 
@@ -148,7 +148,7 @@ Vue.use(TableColumn);
 
 export default {
     created(){
-
+		localStorage.removeItem('blockchainMoNavIndex');
     },
     components: {  
       

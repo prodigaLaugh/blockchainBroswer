@@ -31,8 +31,9 @@
 						
 						<div class="UTXODetailWrap_detailLeftListWrap">
 							<span>资产类型</span>
-							<span @click="$router.push({path:'/blockchainBrowser_assetsDetail',query:{chainid:$route.query.chainid,searchText:UTXODetail.asset_id}})"
-										class="blue">{{UTXODetail.asset_name | operStrNull}}</span>
+							<span 
+								@click="$router.push({path:'/blockchainBrowser_assetsDetail',query:{chainid:$route.query.chainid,searchText:UTXODetail.asset_id}})"
+								class="blue">{{UTXODetail.asset_name | operStrNull}}</span>
 						</div>
 						
 						<div class="UTXODetailWrap_detailLeftListWrap">
@@ -224,7 +225,7 @@ export default {
                 })
         },
 		goUTXODetail(path, query){
-			this.$router.replace({path:path,query:query})
+			this.$router.push({path:path,query:query})
 		}
 
     },

@@ -195,6 +195,7 @@ export default {
     created(){
         // this.addUser();
         this.getUserlists();
+		localStorage.removeItem('blockchainMoNavIndex');
     },
     data(){
         return {

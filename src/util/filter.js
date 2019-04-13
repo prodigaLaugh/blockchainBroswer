@@ -1,4 +1,21 @@
 
+
+let moneySeparate = value => {
+    value = value + ''
+    var newValue = '';
+
+    let newArr = value.split('.');
+    let arr = [...newArr[0]].reverse();
+    let arr1 = newArr[1] ? ('.' + newArr[1]) : '';
+
+    arr.map((item,i) => {
+        newValue += item + (i % 3 === 2 && i !== (arr.length - 1) ? ',' : '');
+    })
+    newValue = newValue.split('').reverse().join('')  + arr1;
+    return newValue;
+    
+}
+
 let interceptStr = str => {
     return str ? str.length > 20
                     ? str.slice(0,20) + '...'
@@ -9,6 +26,12 @@ let interceptStr = str => {
 let interceptStr1 = str => {
     return str ? str.length > 40
                     ? str.slice(0,40) + '...'
+                    : str
+               : '--';
+}
+let interceptStr2 = str => {
+    return str ? str.length > 30
+                    ? str.slice(0,30) + '...'
                     : str
                : '--';
 }
@@ -39,4 +62,12 @@ let userType = (val) => {
 
 
 
-export { interceptStr, interceptStr1,  timestampToTime, userType, operStrNull }
+export { 
+	moneySeparate,
+	interceptStr, 
+	interceptStr1,
+	interceptStr2,
+	timestampToTime, 
+	userType, 
+	operStrNull 
+}

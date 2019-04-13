@@ -137,6 +137,13 @@ const router=new VueRouter({
 			},
 		},
 		{
+			path:'/deposit',//无结果
+			component: resolve => require(['@/pages/deposit'], resolve),
+			meta: { 
+				// requiresAuth: true
+			},
+		},
+		{
 			path:'',
 			redirect:'/main'
 		}

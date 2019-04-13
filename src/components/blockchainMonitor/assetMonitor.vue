@@ -1,5 +1,5 @@
 <template>
-    <div class="assetsMonitorWrap">
+    <div class="assetsMonitorWrap" v-if="assetInfo.assettotal">
         <div class="assetsMonitor_overviewOuterWrap">
             <div class="assetsMonitor_overview">
                 <div class="assetsMonitor_overviewTitle">概况</div>

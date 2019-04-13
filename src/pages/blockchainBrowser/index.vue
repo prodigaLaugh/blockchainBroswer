@@ -104,6 +104,7 @@ Vue.use(TableColumn);
 export default {
     created(){
         this.getBlockchains();
+		localStorage.removeItem('blockchainMoNavIndex');
     },
     components: {  
         
