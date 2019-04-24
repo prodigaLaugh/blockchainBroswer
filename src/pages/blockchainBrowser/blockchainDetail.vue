@@ -54,7 +54,7 @@
 					<div class="adressDetail_addressListWrap">
 						<div class="adressDetail_addressList">
 							<span>块哈希</span>
-							<span>{{blockInfo.block_hash | interceptStr1}} </span>
+							<span :title="blockInfo.block_hash">{{blockInfo.block_hash}} </span>
 						</div>
 						<div class="adressDetail_addressList">
 							<span>块大小(KB)</span>

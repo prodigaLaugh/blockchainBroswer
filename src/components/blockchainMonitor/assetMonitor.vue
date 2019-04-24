@@ -47,7 +47,10 @@
                     <el-table-column
                         label="TXID">
                         <template slot-scope="scope">
-                            <div class="cell blue"  @click="goLinkto('/blockchainBrowser_transactionDetail',scope.row.tx_id)">{{scope.row.tx_id}}</div>
+                            <div 
+								class="cell blue"  
+								@click="goLinkto('/blockchainBrowser_transactionDetail',scope.row.tx_id)"
+								:title="scope.row.tx_id">{{scope.row.tx_id}}</div>
                         </template>
                     </el-table-column>
                     <el-table-column
@@ -74,7 +77,10 @@
                     <el-table-column
                         label="资产ID">
                         <template slot-scope="scope">
-                            <div class="cell blue" @click="goLinkto('/blockchainBrowser_assetsDetail',scope.row.assetid)">{{scope.row.assetid}}</div>
+                            <div 
+								class="cell blue" 
+								@click="goLinkto('/blockchainBrowser_assetsDetail',scope.row.assetid)"
+								:title="scope.row.assetid">{{scope.row.assetid}}</div>
                         </template>
                     </el-table-column>
                     <el-table-column
@@ -107,7 +113,10 @@
                     <el-table-column
                         label="资产ID">
                         <template slot-scope="scope">
-                            <div class="cell blue" @click="goLinkto('/blockchainBrowser_assetsDetail',scope.row.assetid)">{{scope.row.assetid}}</div>
+                            <div 
+								class="cell blue" 
+								@click="goLinkto('/blockchainBrowser_assetsDetail',scope.row.assetid)"
+								:title="scope.row.assetid">{{scope.row.assetid}}</div>
                         </template>
                     </el-table-column>
                     <el-table-column

@@ -163,23 +163,27 @@
 			 }
 		    .adressDetail_addressList{
 		        
-						flex:1;
-						line-height:56px;
-						display:flex;
+				width:50%;
+				line-height:56px;
+				display:flex;
+				
 		        span{
 		            font-size:12px;
 		            color:#333;
-								font-size:14px;
+					font-size:14px;
 		            &:nth-of-type(1){
 		                width:142px;
-										color:#666;
-										padding-left:20px;
+						color:#666;
+						padding-left:20px;
 		            }
-								&:nth-of-type(2){
-									flex:1;
-									color:#333;
-									padding-left:50px;
-								}
+					&:nth-of-type(2){
+						flex:1;
+						color:#333;
+						padding-left:50px;
+						overflow:hidden;
+						text-overflow: ellipsis;
+						white-space: nowrap;
+					}
 		        }
 		    }
 		}
@@ -247,6 +251,14 @@
 										}
 										>span:nth-of-type(2){
 											flex:1;
+											overflow:hidden;
+											text-overflow: ellipsis;
+											white-space: nowrap;
+											>div{
+												overflow:hidden;
+												text-overflow: ellipsis;
+												white-space: nowrap;
+											}
 										}
 									}
 									.right{
@@ -300,17 +312,26 @@
 											color:#666;
 										}
 										>span:nth-of-type(2){
+											flex:1;
 											line-height:20px;
+											overflow:hidden;
+											text-overflow: ellipsis;
+											white-space: nowrap;
+											>div{
+												overflow:hidden;
+												text-overflow: ellipsis;
+												white-space: nowrap;
+											}
 										}
 									}
 								}
 								.right{
 									display:flex;
-									margin-left:90px;
+									padding-left:90px;
 								}
 								
 								>div{
-									flex:1;
+									width:50%;
 								}
 							}
 						}

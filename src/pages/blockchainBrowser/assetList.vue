@@ -10,9 +10,11 @@
                 border
                 style="width: 100%">
                 <el-table-column
-                    prop="asset_id"
                     label="资产ID"
                     width="180">
+					<template slot-scope="scope">
+						<div :title="scope.row.asset_id">{{scope.row.asset_id}}</div>
+					</template>
                 </el-table-column>
                 <el-table-column
                     prop="asset_name"
@@ -87,8 +89,12 @@ export default {
     },
     methods: {
         sortLists(val){
+			console.log(val,val.prop,111)
             if(val.prop){
-                this.orderParams.condition = val.prop;
+				
+                this.orderParams.condition = val.prop =='market_value'
+												?'issue_amount'
+												:val.prop;
                 this.orderParams.order_by = val.order === 'ascending' ? "ASC" : "DESC";
                 
             }else{

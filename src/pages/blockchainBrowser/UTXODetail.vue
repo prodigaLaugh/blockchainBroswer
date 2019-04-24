@@ -316,6 +316,9 @@ export default {
             display:flex;
             flex-direction:column;
             align-items:center;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
             >div{
                 &:nth-of-type(1){
                     color:#333;;
@@ -328,6 +331,9 @@ export default {
                     font-size:14px;
 					color:$blue;
 					padding-bottom:46px;
+					overflow:hidden;
+					white-space: nowrap;
+					text-overflow: ellipsis;
 
                 }
             }
