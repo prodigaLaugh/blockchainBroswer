@@ -38,7 +38,7 @@
 						
 						<div class="UTXODetailWrap_detailLeftListWrap">
 							<span>产生时间</span>
-							<span>Dec-27-2018 07:08:24 AM +UTC</span>
+							<span>{{UTXODetail.generate_time | '-'}}</span>
 						</div>
 						
                         

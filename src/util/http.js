@@ -6,8 +6,17 @@ import * as auth from './auth.js'
 import {setCookie, getCookie, delCookie } from '@/util/cookie'
 let token = getCookie('USERTOKEN')||'';
 
+
+let baseurl = '' ;
+if(process.env.NODE_ENV === 'development'){
+  baseurl = DEVURL;
+}else{
+  baseurl = PRODUCTURL;
+}
+
+
 const myAxios = axios.create({
-    baseURL:'http://47.104.221.216:8077/v1' ,
+    baseURL: baseurl ,
 		// baseURL:'/api',
     timeout:60*1000000000,
     headers: {'token':token},

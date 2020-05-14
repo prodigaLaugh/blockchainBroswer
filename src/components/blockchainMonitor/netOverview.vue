@@ -6,14 +6,14 @@
                 <div>区块总数:</div>
                 <div>{{netoverviewInfo.blocktotal}}</div>
             </div>
-            <div>
+            <!-- <div>
                 <div>共识节点数:</div>
                 <div>{{netoverviewInfo.consensusnums}}</div>
-            </div>
-            <div>
+            </div> -->
+           <!-- <div>
                 <div>数据节点数:</div>
                 <div>{{netoverviewInfo.datanums}}</div>
-            </div>
+            </div> -->
             <div>
                 <div>过去一小时TPS:</div>
                 <div>{{netoverviewInfo.tps}}</div>
@@ -143,7 +143,7 @@ export default {
         >div{
             flex:1;
             margin-right:20px;
-            height:120px;
+            height:200px;
             border-radius:5px;
             display:flex;
             flex-direction: column;

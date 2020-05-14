@@ -83,7 +83,7 @@ const router=new VueRouter({
 				},
 				{
 					path:'',
-					redirect:'blockchainManagement'
+					redirect:'blockchainMonitor'
 				}
 			]
 		},

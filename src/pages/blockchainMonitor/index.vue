@@ -2,7 +2,7 @@
     <div class="outer_wrap">
         <div class="containerTopTitle">区块链监控</div>
 
-        <div class="blockchainSelectWrap">
+        <!-- <div class="blockchainSelectWrap">
             <span>请指定区块链</span>
             <select v-model="chain_name">
                 <option 
@@ -10,7 +10,7 @@
                     :key="index"
                     :value="item.Chainid">{{item.Chainid}}</option>
             </select>
-        </div>
+        </div> -->
 
         <div class="blockchainNavWrap">
             <span 
@@ -19,10 +19,10 @@
             <span 
                 @click="changeNav(1)"
                 :class="{active:navIndex === 1}">资产监控</span>
-            <span 
+           <!-- <span 
                 @click="changeNav(2)"
                 :class="{active:navIndex === 2}">节点监控</span>
-
+ -->
         </div>
 
         <div v-if="navIndex === 0">

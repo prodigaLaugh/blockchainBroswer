@@ -5,7 +5,7 @@
             <div class="blockchainBrowser_Top_title">
                 区块链浏览器
             </div>
-            <div class="blockchainBrowser_top_selectWrap">
+            <!-- <div class="blockchainBrowser_top_selectWrap">
                 <span class="blockchainBrowser_top_selectLeftBox">指定区块链</span>
                 <select 
                     v-model="blockchain_select"
@@ -15,7 +15,7 @@
                         :key="index"
                         :value="item.Chainid">{{item.Chainid}}</option>
                 </select>
-            </div>
+            </div> -->
             <div class="blockchainBrowser_top_inpWrap">
                 <input 
                     placeholder="搜索地址/交易ID/区块高度/资产名/资产ID/UTXO"

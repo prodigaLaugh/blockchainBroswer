@@ -9,7 +9,7 @@
       </div>
       <div class="commonHeaderCenterWrap">
       
-				<el-select  
+				<!-- <el-select  
 					v-model="blockchain_select"
 					placeholder="请选择">
 					
@@ -19,7 +19,7 @@
 						:label="item.Chainid"
 						:value="item.Chainid">
 					</el-option>
-				</el-select>
+				</el-select> -->
 			
         <input 
           placeholder="搜索地址/交易ID/区块高度/资产名/资产ID/UTXO"
@@ -31,7 +31,7 @@
             class="el-icon-search"></span>  
       </div>
       <div class="commonHeaderRightWrap">
-        <span>admin</span>
+      <!--  <span>admin</span> -->
       </div>
     </div>
   </div>

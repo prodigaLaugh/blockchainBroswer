@@ -3,11 +3,12 @@
     <div class="commonHeader">
       <div class="commonHeaderLeftWrap">
         <!-- logo -->
-				M0运维平台
+			TK Explorer
+				
       </div>
 
       <div class="commonHeaderRightWrap">
-        <span>admin</span>
+        <!-- <span>admin</span> -->
       </div>
     </div>
   </div>

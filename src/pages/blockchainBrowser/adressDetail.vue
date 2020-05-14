@@ -89,7 +89,7 @@
 								</div>
 								<div class="right">
 									<div>
-										<span>余额:</span>
+										<span>金额:</span>
 										<span>{{item.asset_amount}}</span>
 									</div>
 									<div>
