@@ -2,14 +2,14 @@
     <div class="adressDetail_wrap">
         <my-header/>
         <div class="detailOuterWrap adressDetail_containerWrap">
-			<div class="detail_commonTitle">地址详情</div>
+			<div class="topTitle">地址详情</div>
             <div class="adressDetail_addressWrap">
                 <div class="commonDetailTitle">地址概况</div>
                 <div class="adressDetail_addressListsWrap">
 					<div class="adressDetail_addressListWrap">
 						<div class="adressDetail_addressList">
 								<span>地址</span>
-								<span>{{adressInfo.address_id | interceptStr1}} </span>
+								<span>{{ adressInfo.address_id }} </span>
 						</div>
 						<div class="adressDetail_addressList">
 								<span>交易总数</span>
@@ -71,7 +71,7 @@
                 </div>
             </div>
 
-            <div class="adressDetail_transcationWrap" v-if="assetsLists.length">
+            <div class="adressDetail_transcationWrap" style="margin-top:25px;" v-if="assetsLists.length">
                 <div class="commonDetailTitle">最新交易</div>
                 <div class="adressDetail_transcationListsWrap">
 
@@ -170,13 +170,13 @@ export default {
         this.getAdressDetail();
     },
     components: {  
-			myHeader
-		},
-		watch:{
-			$route:function(){
-				this.getAdressDetail();
-			}
-		},
+		myHeader
+	},
+	watch:{
+		$route:function(){
+			this.getAdressDetail();
+		}
+	},
     data(){
         return {
             adressInfo:{},
@@ -185,10 +185,11 @@ export default {
 
             assetIndex:0,
             params_assetPagination:{
-                page:0,
+                page:1,
                 page_size:10,
             },
             totalNum:0,
+			isLoading: true,
 
             transactionLists:[],
 
@@ -203,6 +204,11 @@ export default {
             if(this.assetIndex === index){
                 return;
             }
+			
+			this.isLoading = true;
+			this.params_assetPagination.page = 1;
+			
+			
             this.assetIndex = index;
             this.assetId = id;
             this.getTransactionLists();
@@ -218,9 +224,11 @@ export default {
 
                     let lists = data.data.asset_info;
                     this.assetsLists = lists;
+					
                     if(lists.length){
+						
                         this.assetId = lists[0].asset_id;
-                        this.getTransactionLists(this.assetId)
+                        this.getTransactionLists()
                     }
                     
                 })
@@ -233,21 +241,53 @@ export default {
 
             let params = this.getRouteParams(['chainid','searchText'],['chain_name','address_id'])
             params.asset_id = this.assetId;
+			
             let currrentParams = Object.assign({}, params, this.params_assetPagination)
-
+			if(!this.isLoading){
+			    return false;
+			}
+			
+			this.isLoading = false;
+			
             this.$http.post(url, currrentParams)
                 .then(({data})=>{
-                    if(data.code === '0'){
-                        this.transactionLists = data.data.tx_list;
-                        this.totalNum = data.data.total_item;
-                    }
+					
+					let lists = data.data.tx_list;
+					let page = this.params_assetPagination.page;
+					
+					if(lists&&lists.length){
+						if(page === 1 ){
+							this.transactionLists.splice(0,9999,...lists)
+						}else{
+							this.transactionLists.push(...lists);
+						}
+					    this.params_assetPagination.page = (page+1);
+					    this.isLoading = true;
+					}else{
+					    this.isLoading = false;
+					}
+					
+                    
                     
                 })
                 .catch(({data})=>{
-                    console.log(data,87787)
+                    
                 })
-        }
-    }
+        },
+		
+    },
+	async mounted(){
+		await this.getAdressDetail();
+		
+		this.$nextTick(()=>{
+			window.onscroll = () => {
+			    let bottomOfWindow = document.documentElement.offsetHeight - document.documentElement.scrollTop - window.innerHeight <= 200
+			    if (bottomOfWindow && this.isLoading && this.assetId) {
+			        this.getTransactionLists();
+			    }
+			}
+		})
+	}
 }
 </script>
 

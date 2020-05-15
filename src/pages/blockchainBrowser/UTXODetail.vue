@@ -4,7 +4,7 @@
         
         <div class="detailOuterWrap">
 
-			<div class="detail_commonTitle">UTXO详情</div>
+			<div class="topTitle">UTXO详情</div>
             <div class="UTXODetail_detailOutersWrap">
                 <div class="commonDetailTitle">UTXO</div>
                 <div class="UTXODetail_detailWrap">
@@ -44,7 +44,7 @@
                         
                     </div>
                     <div class="UTXODetailWrap_detailRightWrap">
-                        <div>额度:</div>
+                        <div>额度</div>
                         <div>{{UTXODetail.amount}}</div>
                     </div>
                 </div>
@@ -251,10 +251,10 @@ export default {
 		padding-bottom:16px;
 	}
     .UTXODetailWrap_detailLeftListWrap{
-		border-bottom:1px dashed #e5e2e2;
 		display:flex;
 		flex-direction: row;
-		line-height:46px;
+		line-height:54px;
+		font-size:14px;
 		margin-right:40px;
 		&:last-of-type{
 			border-bottom:0;
@@ -264,17 +264,17 @@ export default {
 			
             &:nth-of-type(1){
 				width:122px;
-				color:#666;
+				color:#5f6d7b;
 				padding-left:20px;
             }
 			&:nth-of-type(2){
 				flex:1;
 				padding-left:18px;
-				color:#333;
+				color:#5f6d7b;
 				div{
 					color:#333;
 					span:nth-of-type(1){
-						color:#666;
+						color:#5f6d7b;
 					}
 				}
 			}
@@ -282,32 +282,32 @@ export default {
     }
     
     .UTXODetailWrap_detailRightWrap{
-        flex:.5;
+        flex:.3;
         height:228px;
         display:flex;
         flex-direction: column;
         justify-content: center;
-		padding-left:182px;
-        background:url(../../assets/blockchainBrowser/utxoAssetIcon.png) no-repeat 30px center;
-		background-size:100px;
-		border-left:1px dashed $blue;
+		padding-left:106px;
+        background:url(../../assets/utxo/icon_edu.png) no-repeat 30px center;
+		background-size:58px;
+		border-left:1px dashed #797979;
         >div{
             &:nth-of-type(1){
-                padding-bottom:20px;
-				font-size:18px;
-				color:#666;
+                padding-bottom:12px;
+				font-size:13px;
+				color:#283d5a;
             }
 			&:nth-of-type(2){
-				font-size:28px;
-				color:#ffc00c;
+				font-size:26px;
+				color:#213654;
 			}
         }
     }
 }
 
 .UTXODetailWrap_transactionWrap{
-	margin-top:17px;
-	margin-bottom:17px;
+	margin-top:25px;
+	margin-bottom:25px;
     .UTXODetailWrap_transactionContainer{
         display:flex;
 		background:#fff;
@@ -321,11 +321,12 @@ export default {
 			text-overflow: ellipsis;
             >div{
                 &:nth-of-type(1){
-                    color:#333;;
+                    color:#41536c;;
 					line-height:100px;
 					padding-left:41px;
-					font-size:20px;
-					background:url(../../assets/blockchainBrowser/utxoSY1.png) no-repeat left center;
+					font-size:16px;
+					background:url(../../assets/utxo/icon_chansheng.png) no-repeat left center;
+					background-size:30px;
                 }
                 &:nth-of-type(2){
                     font-size:14px;
@@ -340,7 +341,8 @@ export default {
 			&:nth-of-type(3){
 				>div{
 					&:nth-of-type(1){
-						background-image:url(../../assets/blockchainBrowser/utxoSY2.png);
+						background-image:url(../../assets/utxo/icon_huafei.png);
+						padding-left:37px;
 					}
 				}
 			}
@@ -352,7 +354,8 @@ export default {
 				width:164px;
 				height:158px;
 				
-				background:url(../../assets/blockchainBrowser/utxoArrow.png) no-repeat center 88px;
+				background:url(../../assets/utxo/icon-youjiantou.png) no-repeat center 100px;
+				background-size:20px;
 			}
             
         }

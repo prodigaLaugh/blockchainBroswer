@@ -1,13 +1,15 @@
 <template>
 	<div class="content_outer_wrap">
 		<my-header/>
-		<div :class="['commonContainerWrap',{active:leftNavFolder}]">
+		<!-- <leftnav/> -->
+		<!-- <div :class="['commonContainerWrap',{active:leftNavFolder}]">
             <span 
                 @click="leftNavFolder=!leftNavFolder"
                 :class="['commLeftArrow',{active:leftNavFolder}]"> </span>
-			<leftnav/>
-			<router-view/>
-		</div>
+			<leftnav/> -->
+		<router-view/>
+			
+		<!-- </div> -->
 		
 		<my-footer/>
 	</div>
@@ -40,6 +42,7 @@ export default{
 
 </script>
 <style lang="scss" >
+	
     .content_outer_wrap{
         height:100%;
         .commLeftArrow{

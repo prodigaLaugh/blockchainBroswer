@@ -1,14 +1,173 @@
 <template>
-	<div class="app-content" v-cloak>
+	<div class="app-content" v-cloak style="padding-top:54px;">
+		<myHeader/>
 		<router-view />
 	</div>
 </template>
 
-
+<script>
+	import myHeader from '@/components/headerSearch.vue'
+	export default{
+		components: {  
+			myHeader,
+	    },
+	}
+</script>
 
 <style lang="scss">
+	body{
+		min-width:1200px;
+		overflow-x:auto;
+		background: #f5f7fa;
+	}
+	.detailOuterWrap{
+		@include defaultWidth;
+	}
 	@import url("./../css/reset.css");
 	@import url("./../css/common.css");
+	.commonHeaderWrap {
+	
+		.commonHeader {
+			position: fixed;
+			left: 0;
+			top: 0;
+			right: 0;
+			height: 54px;
+			align-items: center;
+			background: $bgColor;
+			z-index:10;
+	
+			.header {
+				width: $content-width;
+				margin: 0 auto;
+				height:54px;
+				display:flex;
+				justify-content: space-between;
+				
+				.left{
+					display:flex;
+					align-items: center;
+					.log{
+						display:flex;
+						align-items: center;
+						img{
+							width:17px;
+						}
+						>span{
+							font-size:12px;
+							color:#fff;
+							margin-left:10px;
+						}
+					}
+					.inp{
+						margin-left:76px;
+						display: flex;
+						align-items: center;
+						position:relative;
+						input{
+							background:none;
+							width:324px;
+							border:1px solid #848e9b;
+							line-height:36px;
+							padding:0 30px 0 15px;
+							border-radius:5px;
+							color:#fff;
+						}
+						span{
+							background:url(../assets/home/search.png) no-repeat center;
+							background-size:16px;
+							position:absolute;
+							width:32px;
+							height:38px;
+							right:0;
+							top:0;
+							@include pointer;
+						}
+					}
+				}
+				
+				.right{
+					display:flex;
+					align-items: center;
+					>a{
+						font-size:12px;
+						color:#fff;
+						line-height:54px;
+						margin-left:50px;
+					}
+				}
+			}
+	
+	
+		}
+	
+	}
+	
+	
+	.commonItemWrap{
+		background:#fff;
+		flex:1;
+		padding:0 28px; 
+		&:last-of-type{
+			margin-left:24px;
+		}
+	}
+	
+	
+	
+	// 标题样式
+	.topTitle{
+		padding:36px 0 30px;
+		font-size:18px;
+		color:#425263;
+		font-weight:500;
+	}
+	.commonTitle_one{
+		display:flex;
+		justify-content: space-between;
+		padding:30px 0;
+		>span{
+			font-size:16px;
+			color:#425263;
+		}
+		>div{
+			display:flex;
+			align-items: center;
+			>span{
+				border:1px solid $btnBg;
+				border-radius:5px;
+				width:100px;
+				line-height:34px;
+				text-align:center;
+				color:$btnBg;
+				font-size:12px;
+				@include pointer;
+				margin-left:12px;
+				transition:all .5s;
+				&.active{
+					color:#fff;
+					background:$btnBg;
+				}
+			}
+		}
+	}
+	
+	.commonTitle_one{
+		font-size:16px;
+		padding:28px 0 30px;
+		color:#425263;
+		font-weight:500;
+	}
+	
+	.echartsWrap{
+		@include defaultWidth;
+		background:#fff;
+		padding:0 28px; 
+		margin-top:20px;
+		#myChart{
+			height:400px;
+		}
+	}
 	
 	//header样式处理
 	.commonHeaderCenterWrap{
@@ -31,10 +190,11 @@
 	}
 	//详情标题样式
 	.commonDetailTitle{
-	    font-size:16px;
-		color:#fff;
-		padding:18px 0 12px 22px;
-		background:#b2c4e7;
+	    font-size:14px;
+		color:#455565;
+		padding-left:28px;
+		background:#e4ebf1;
+		line-height:50px;
 	}
 	.detail_commonTitle{
 		font-size:24px;
@@ -101,16 +261,16 @@
     }
     .el-table th,
     .el-table td{
-        padding-left:80px;
+        // padding-left:80px;
         font-size:14px;
         border-right:0;
-        &:last-of-type{
-            padding-left:0;
-            border-right:1px solid #dddddd;
-        }
+        // &:last-of-type{
+        //     padding-left:0;
+        //     border-right:1px solid #dddddd;
+        // }
     }
 		.el-table .cell, .el-table th div{
-			padding-left:0!important;
+			// padding-left:0!important;
 			display:flex;
 			justify-content: space-between;
 		}
@@ -151,11 +311,10 @@
 		//区块详情 地址详情样式
 		.adressDetail_addressWrap{
 		   .adressDetail_addressListsWrap{
-				 padding:0 34px 12px;
+				 padding:20px 28px 20px;
 				 background:#fff;
 				 .adressDetail_addressListWrap{
 					 display:flex;
-					 border-bottom:1px dashed #e5e2e2;
 					 &:last-of-type{
 						 border-bottom:0 none;
 					 }
@@ -164,7 +323,7 @@
 		    .adressDetail_addressList{
 		        
 				width:50%;
-				line-height:56px;
+				line-height:54px;
 				display:flex;
 				
 		        span{
@@ -172,13 +331,12 @@
 		            color:#333;
 					font-size:14px;
 		            &:nth-of-type(1){
-		                width:142px;
-						color:#666;
-						padding-left:20px;
+		                width:124px;
+						color:#727e8a;
 		            }
 					&:nth-of-type(2){
 						flex:1;
-						color:#333;
+						color:#727e8a;
 						padding-left:50px;
 						overflow:hidden;
 						text-overflow: ellipsis;
@@ -247,7 +405,7 @@
 										display:flex;
 										>span:nth-of-type(1){
 											width:60px;
-											color:#333;
+											color:#64676d;
 										}
 										>span:nth-of-type(2){
 											flex:1;
@@ -263,6 +421,7 @@
 									}
 									.right{
 										justify-content: space-between;
+										color:#64676d;
 									}
 								}
 								
@@ -296,10 +455,18 @@
 												width:88px;
 												text-align:right;
 												margin-right:50px;
-												color:#666;
+												color:#64676d;
 											}
 											>span:nth-of-type(2){
 												line-height:20px;
+												overflow:hidden;
+												padding-right:40px;
+												width:340px;
+												>div{
+													text-overflow: ellipsis;
+													white-space: nowrap;
+													overflow:hidden;
+												}
 											}
 										}
 									}
@@ -309,7 +476,7 @@
 										align-items: center;
 										>span:nth-of-type(1){
 											width:68px;
-											color:#666;
+											color:#64676d;
 										}
 										>span:nth-of-type(2){
 											flex:1;

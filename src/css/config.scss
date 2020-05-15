@@ -1,11 +1,17 @@
 $header-height: 70px;
 $content-width: 1200px;
+$mAuto:0 auto;
+
+
+//新颜色
+$bgColor: #213654;
+$btnBg:#203555;
 
 // 颜色
 $color-333:#333;
 $color-666:#666;
 $color-999:#999;
-$blue: #4778c7;
+$blue: #4a7ac9;
 $red:#f83d46;
 
 $bgcolor-ddd:#ddd;
@@ -22,6 +28,11 @@ $fontsize-20:20px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+@mixin defaultWidth {
+  width:$content-width;
+  margin:0 auto;
 }
 
 @mixin pointer {

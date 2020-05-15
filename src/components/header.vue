@@ -1,49 +1,49 @@
 <template>
-  <div  class="commonHeaderWrap">
-    <div class="commonHeader">
-      <div class="commonHeaderLeftWrap">
-        <!-- logo -->
-			TK Explorer
-				
-      </div>
+	<div class="commonHeaderWrap">
+		<div class="commonHeader" style="z-index:11">
+			<div class="header">
+				<div class="left">
+					<div class="log">
+						<img src="../assets/logo.png" alt="">
+						<span>TK EXPLORER</span>
+					</div>
+				</div>
 
-      <div class="commonHeaderRightWrap">
-        <!-- <span>admin</span> -->
-      </div>
-    </div>
-  </div>
+				<div class="right">
+					<router-link v-for="(item, index) in navLists" :key="index" :to="item.path">{{item.text}}</router-link>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
 </template>
 
-<style lang="scss" scoped>
-
-  .commonHeaderWrap{
-    height:60px;
-    .commonHeader{
-      position:fixed;
-      left:0;
-      top:0;
-      right:0;
-      height:60px;
-      padding:0 40px;
-      display:flex;
-      justify-content: space-between;
-      align-items:center;
-      background:$blue;
-      z-index:20;
-			.commonHeaderLeftWrap{
-				font-size:20px;
-				color:#fff;
+<script>
+	export default {
+		data() {
+			return {
+				navLists: [{
+						path: '/main/home',
+						text: '首页'
+					},
+					{
+						path: '/networkOverview',
+						text: '网络概览'
+					},
+					{
+						path: '/assetMonitoring',
+						text: '资产监控'
+					},
+					{
+						path: '/chainBroswer',
+						text: '区块链浏览器'
+					},
+				]
 			}
-    }
-    .commonHeaderRightWrap{
-      span{
-        padding-right:32px;
-        padding-left:28px;
-        background:url(../assets/defaultAvatar.png) no-repeat left center;
-        color:#fff;
-        line-height:32px;
-      }
-    }
-  }
-</style>
+		}
+	}
+</script>
 
+
+	

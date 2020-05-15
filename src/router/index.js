@@ -39,6 +39,23 @@ const router=new VueRouter({
 				// requiresAuth: true
 			},
 			children:[
+				
+				{
+					path:'home',
+					component:resolve => require(['@/pages/home'], resolve),
+					meta: { 
+						// requiresAuth: true
+					},
+				},//新增
+				
+				
+				
+				
+				
+				
+				
+				
+				
 				{
 					path:'blockchainManagement',
 					component:resolve => require(['@/pages/blockchainManagement/index'], resolve),
@@ -83,10 +100,45 @@ const router=new VueRouter({
 				},
 				{
 					path:'',
-					redirect:'blockchainMonitor'
+					redirect:'home'
 				}
 			]
 		},
+		{
+			path:'/networkOverview',//网络概览
+			component: resolve => require(['@/pages/networkOverview'], resolve),
+			meta: { 
+				// requiresAuth: true
+			},
+		},//新增
+		
+		{
+			path:'/assetMonitoring',//网络概览
+			component: resolve => require(['@/pages/assetMonitoring'], resolve),
+			meta: { 
+				// requiresAuth: true
+			},
+		},//新增
+		{
+			path:'/chainBroswer',//区块链浏览器
+			component: resolve => require(['@/pages/chainBroswer'], resolve),
+			meta: { 
+				// requiresAuth: true
+			},
+		},//新增
+		
+		{
+			path:'/allAssets',//全部资产
+			component: resolve => require(['@/pages/allAssets'], resolve),
+			meta: { 
+				// requiresAuth: true
+			},
+		},//新增
+		
+		
+		
+		
+		
 		{
 			path:'/blockchainBrowser_assetList',//资产一览
 			component: resolve => require(['@/pages/blockchainBrowser/assetList'], resolve),

@@ -3,7 +3,7 @@
         <my-header/>
 				
         <div class="detailOuterWrap transactionDetainWrap_assetsWrap">
-			<div class="detail_commonTitle">交易详情</div>
+			<div class="topTitle">交易详情</div>
 			<div class="commonDetailTitle">交易:{{transactionInfo.tx_id}}</div>
            <!-- <div class="transactionDetainWrap_assetsTitle">
                 <span></span>

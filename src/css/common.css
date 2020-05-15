@@ -92,7 +92,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 
 .blue{
-  color:#4778c7;
+  color:#4778c7!important;
   cursor:pointer;
 }
 
@@ -104,9 +104,7 @@ body{
 .outer_wrap{
   flex:1;
 }
-.detailOuterWrap{
-	padding:10px 40px 102px 40px;
-}
+
 
 
 .el-pagination{

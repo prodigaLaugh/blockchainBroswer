@@ -2,7 +2,7 @@
     <div class="adressDetail_wrap">
         <my-header/>
         <div class="detailOuterWrap adressDetail_containerWrap">
-						<div class="detail_commonTitle">资产详情</div>
+			<div class="topTitle">资产详情</div>
             <div class="adressDetail_addressWrap">
 				<div class="commonDetailTitle">资产概况</div>
                 <div class="adressDetail_addressListsWrap">
@@ -45,7 +45,7 @@
             </div>
 						
 						
-			<div class="adressDetail_transcationWrap" style="margin-top:17px;" v-if="transactionLists.length">
+			<div class="adressDetail_transcationWrap" style="margin-top:40px;" v-if="transactionLists.length">
 				<div class="commonDetailTitle">交易列表</div>
 				<div class="adressDetail_transcationListsWrap">
 
@@ -140,6 +140,9 @@ Vue.use(Pagination);
 
 export default {
     created(){
+		this.id = this.$route.query.searchText;
+		
+		this.getTransactionLists()
         this.getAssetsDetail()
         
     },
@@ -151,12 +154,15 @@ export default {
             assetInfo:{},
 
             params_assetPagination:{
-                page:0,
+                page: 1,
                 page_size:2,
             },
             totalNum:0,
 
             transactionLists:[],
+			
+			id:'',
+			isLoading: true,
 
             
         }
@@ -172,38 +178,65 @@ export default {
 
             this.$http.post(url, params)
                 .then(({data})=>{
-                    console.log(data,7777)
                     this.assetInfo = data.data;
-										let id = data.data.asset_id;
-										this.getTransactionLists(id)
+					let id = data.data.asset_id;
+					
                     
                 })
                 .catch(({data})=>{
                     console.log(data)
                 })
         },
-        getTransactionLists(id){
+        getTransactionLists(){
             let url = `/chain_browser/getAssetTxInfo`;
            
-						let params = {
-							asset_id: id,
-							chain_name: this.$route.query.chainid,
-						}
+			let params = {
+				asset_id: this.id,
+				chain_name: this.$route.query.chainid,
+			}
             let currrentParams = Object.assign({}, params, this.params_assetPagination)
+			
+			if(!this.isLoading){
+			    return false;
+			}
+			
+			this.isLoading = false;
 
             this.$http.post(url, currrentParams)
                 .then(({data})=>{
-                    if(data.code === '0'){
-                        this.transactionLists = data.data.tx_list;
-                        this.totalNum = data.data.total_item;
-                    }
+                    
+					
+					let lists = data.data.tx_list;
+					let page = this.params_assetPagination.page;
+					
+					if(lists&&lists.length){
+						if(page === 1 ){
+							this.transactionLists.splice(0,9999,...lists)
+						}else{
+							this.transactionLists.push(...lists);
+						}
+					    this.params_assetPagination.page = (page+1);
+					    this.isLoading = true;
+					}else{
+					    this.isLoading = false;
+					}
                     
                 })
                 .catch(({data})=>{
                     console.log(data,87787)
                 })
         }
-    }
+    },
+	mounted(){
+		this.$nextTick(()=>{
+			window.onscroll = () => {
+			    let bottomOfWindow = document.documentElement.offsetHeight - document.documentElement.scrollTop - window.innerHeight <= 200
+			    if (bottomOfWindow && this.isLoading) {
+			        this.getTransactionLists();
+			    }
+			}
+		})
+	}
 }
 </script>
 

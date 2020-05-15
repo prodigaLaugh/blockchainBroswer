@@ -2,7 +2,7 @@
     <div class="adressDetail_wrap">
         <my-header/>
         <div class="detailOuterWrap adressDetail_containerWrap">
-			<div class="detail_commonTitle">区块详情</div>
+			<div class="topTitle">区块详情</div>
             <div class="adressDetail_addressWrap">
 				<div class="commonDetailTitle">区块{{blockInfo.block_height}}</div>
                 <div class="adressDetail_addressListsWrap">
@@ -36,7 +36,7 @@
 						</div>
 						<div class="adressDetail_addressList">
 							<span>上个块</span>
-							<span>{{blockInfo.preblock_height}}</span>
+							<span class="blue" @click="goLinkto(blockInfo.preblock_height)">{{blockInfo.preblock_height}}</span>
 						</div>
 					</div>
 					
@@ -47,7 +47,7 @@
 						</div>
 						<div class="adressDetail_addressList">
 							<span>下个块</span>
-							<span>{{blockInfo.nextblock_height}}</span>
+							<span class="blue" @click="goLinkto(blockInfo.nextblock_height)">{{blockInfo.nextblock_height}}</span>
 						</div>
 					</div>
 					
@@ -200,6 +200,10 @@ export default {
         }
     },
     methods:{
+		goLinkto(val){
+			const chainid = this.$route.query.chainid;
+			this.$router.push({path:'/blockchainBrowser_blockchainDetail', query:{chainid, searchText: val}})
+		},
         handleCurrentChange(val) {
             this.params_assetPagination.page = val;
             this.getTransactionLists();
