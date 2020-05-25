@@ -20,6 +20,13 @@
 				
 				<div class="infoWrap">
 					<div class="listWrap">
+						<img src="../assets/home/icon6.png" alt="">
+						<div>
+							<span>{{netoverviewInfo.blocktotal}}</span>
+							<span>总运行时间</span>
+						</div>
+					</div>
+					<div class="listWrap">
 						<img src="../assets/home/icon1.png" alt="">
 						<div>
 							<span>{{netoverviewInfo.blocktotal}}</span>

@@ -8,7 +8,7 @@
 				<span>概况</span>
 			</div>
 			
-			<div class="netOverviewListsWrap">
+			<div class="netOverviewLists">
 			    <div>
 			        <div>区块总数</div>
 			        <div>{{netoverviewInfo.blocktotal}}</div>
@@ -145,7 +145,7 @@
 			padding-bottom:42px;
 		}
 		
-		.netOverviewListsWrap{
+		.netOverviewLists{
 			display:flex;
 			justify-content: space-between;
 			align-items: center;
