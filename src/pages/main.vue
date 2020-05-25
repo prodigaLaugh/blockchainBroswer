@@ -1,7 +1,6 @@
 <template>
 	<div class="content_outer_wrap">
 		<my-header/>
-		<!-- <leftnav/> -->
 		<!-- <div :class="['commonContainerWrap',{active:leftNavFolder}]">
             <span 
                 @click="leftNavFolder=!leftNavFolder"
@@ -22,7 +21,6 @@ Vue.use(http);
 
 import myHeader from '@/components/header'
 import myFooter from '@/components/footer'
-import leftnav from '@/components/leftnav';
 
 export default{
 	components: {  

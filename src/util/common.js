@@ -2,12 +2,8 @@ export default{
   install(Vue,options){
     
     
-		
-		Vue.prototype.linkTo = function (path,obj) {
-      this.$router.push({path:path,query:obj});
-    }  
 
-    Vue.prototype.getSearchType= function (params, sucessFn, errFn) {
+    Vue.prototype.getSearchType= function (params, sucessFn, errFn) { //获取搜索类型
       
       let url = `/chain_browser/searchtype`
       this.$http.post(url,params)
@@ -24,7 +20,7 @@ export default{
         })
     }  
 
-    Vue.prototype.getBlockchainLists= function (sucessFn, errFn) {
+    Vue.prototype.getBlockchainLists= function (sucessFn, errFn) { //获取链列表
       
       let url = `/chain_manager/list`
       this.$http.get(url)
@@ -36,7 +32,7 @@ export default{
         })
     } 
 
-    Vue.prototype.getLinkAdressByType = function(val){
+    Vue.prototype.getLinkAdressByType = function(val){ //根据搜索类型跳转页面
       var json = {
         0:'/blockchainBrowser_adressDetail',
         1:'/blockchainBrowser_assetsDetail',
@@ -47,12 +43,12 @@ export default{
       return json[val];
     }
 
-    Vue.prototype.goUrlByType = function(val,query){
+    Vue.prototype.goUrlByType = function(val,query){ //路由跳转方法
       let path = this.getLinkAdressByType(val)
       this.$router.push({path: path, query: query})
     }
 
-    Vue.prototype.getRouteParams = function(queryKey, paramsKey){
+    Vue.prototype.getRouteParams = function(queryKey, paramsKey){ //获取参数
       let query = this.$route.query;
       var obj = {}
 
