@@ -10,7 +10,6 @@
 			
 		<!-- </div> -->
 		
-		<my-footer/>
 	</div>
 </template>	
 
@@ -20,12 +19,10 @@ import http from '@/util/http.js'
 Vue.use(http);
 
 import myHeader from '@/components/header'
-import myFooter from '@/components/footer'
 
 export default{
 	components: {  
 		myHeader,
-		myFooter,
 		leftnav
     },
     data(){
