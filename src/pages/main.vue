@@ -23,11 +23,10 @@ import myHeader from '@/components/header'
 export default{
 	components: {  
 		myHeader,
-		leftnav
     },
     data(){
         return {
-            leftNavFolder:false,
+           
         }
     },
     methods:{

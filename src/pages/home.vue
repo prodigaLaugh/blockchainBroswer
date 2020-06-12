@@ -127,16 +127,18 @@
 						</div>
 					</div>
 					
-					<div class="listsWrap">
+					<div class="listsWrap"  v-if="assetInfo.AssetTopList">
 						<el-table
 						        :data="assetInfo.AssetTopList"
 						        border
 						        style="width: 100%">
 						        <el-table-column
-						            label="资产ID">
+						            label="资产ID"
+									width="150">
 						            <template slot-scope="scope">
 						                <div 
 											class="cell blue" 
+											style="overflow:hidden;width:100px"
 											@click="goLinkto('/blockchainBrowser_assetsDetail',scope.row.assetid)"
 											:title="scope.row.assetid">{{scope.row.assetid}}</div>
 						            </template>

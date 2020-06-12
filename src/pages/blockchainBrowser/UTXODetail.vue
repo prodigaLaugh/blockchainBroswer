@@ -319,6 +319,7 @@ export default {
 			overflow: hidden;
 			white-space: nowrap;
 			text-overflow: ellipsis;
+			margin:0 20px;
             >div{
                 &:nth-of-type(1){
                     color:#41536c;;

@@ -52,7 +52,8 @@
 					border
 					style="width: 100%">
 					<el-table-column
-						label="TXID">
+						label="TXID"
+						width="700">
 						<template slot-scope="scope">
 							<div 
 								class="cell blue"  
@@ -92,25 +93,30 @@
 					border
 					style="width: 100%">
 					<el-table-column
-						label="资产ID">
+						label="资产ID"
+						width="500">
 						<template slot-scope="scope">
 							<div 
 								class="cell blue" 
+								style="width:400px;overflow:hidden;text-overflow: ellipsis;white-space: nowrap;"
 								@click="goLinkto('/blockchainBrowser_assetsDetail',scope.row.assetid)"
 								:title="scope.row.assetid">{{scope.row.assetid}}</div>
 						</template>
 					</el-table-column>
 					<el-table-column
 						prop="assetname"
-						label="资产名称">
+						label="资产名称"
+						width="140">
 					</el-table-column>
 					<el-table-column
 						prop="issueamount"
-						label="发行总量">
+						label="发行总量"
+						width="240">
 					</el-table-column>
 					<el-table-column
 						prop="holdernums"
-						label="持有人数">
+						label="持有人数"
+						width="100">
 					</el-table-column>
 					<el-table-column
 						prop="txnumsmonth"
@@ -139,10 +145,12 @@
 					border
 					style="width: 100%">
 					<el-table-column
-						label="资产ID">
+						label="资产ID"
+						width="540">
 						<template slot-scope="scope">
 							<div 
 								class="cell blue" 
+								style="width:400px;overflow:hidden"
 								@click="goLinkto('/blockchainBrowser_assetsDetail',scope.row.assetid)"
 								:title="scope.row.assetid">{{scope.row.assetid}}</div>
 						</template>

@@ -12,10 +12,11 @@
 					style="width: 100%">
 					<el-table-column
 						label="资产ID"
-						width="180">
+						width="200">
 						<template slot-scope="scope">
 							<div 
 								class="cell blue"
+								style="width:130px;overflow:hidden;"
 								@click="goLinkto('/blockchainBrowser_assetsDetail',scope.row.asset_id)"
 								:title="scope.row.asset_id"
 							>{{scope.row.asset_id}}</div>
@@ -23,12 +24,14 @@
 					</el-table-column>
 					<el-table-column
 						prop="asset_name"
-						label="资产名称">
+						label="资产名称"
+						width="110">
 					</el-table-column>
 					<el-table-column
 						prop="late_txtime"
 						sortable="custom"
-						label="最后交易">
+						label="最后交易"
+						width="190">
 						<template slot-scope="scope">
 							<div >{{scope.row.late_txtime.replace(/(\s\+.*)/,'')}}</div>
 						</template>
@@ -36,17 +39,20 @@
 					<el-table-column
 						prop="issue_amount"
 						sortable="custom"
-						label="发行总量">
+						label="发行总量"
+						width="200">
 					</el-table-column>
 					<el-table-column
 						prop="market_value"
 						sortable="custom"
-						label="总市值">
+						label="总市值"
+						width="200">
 					</el-table-column>
 					<el-table-column
 						prop="holders"
 						sortable="custom"
-						label="持有人数">
+						label="持有人数"
+						width="100">
 					</el-table-column>
 					<el-table-column
 						prop="txs_num"

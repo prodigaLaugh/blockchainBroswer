@@ -46,7 +46,7 @@
 					    style="width: 100%">
 					    <el-table-column
 					    label="区块高度"
-						width="90">
+						>
 					        <template slot-scope="scope">
 					            <div class="cell blue" style="width:80px;" @click="goLinkto('/blockchainBrowser_blockchainDetail',scope.row.block_height)">{{scope.row.block_height}}</div>
 					        </template>
@@ -54,7 +54,7 @@
 					    <el-table-column
 					    prop="create_time"
 					    label="生成时间"
-						width="200">
+						width="400">
 					    </el-table-column>
 					    <el-table-column
 					    prop="tx_nums"

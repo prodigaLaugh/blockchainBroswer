@@ -50,10 +50,12 @@
 					border
 					style="width: 100%">
 					<el-table-column
-						label="资产ID">
+						label="资产ID"
+						width="400">
 						<template slot-scope="scope">
 							<span 
 								class="blue"
+								style="display:block;overflow:hidden;width:300px;"
 								@click="goNewLinkto('/blockchainBrowser_assetsDetail',{chainid:blockchain_select,searchText:scope.row.assetid})">{{scope.row.assetid}}</span>
 						</template>
 						
@@ -61,6 +63,9 @@
 					<el-table-column
 						prop="assetname"
 						label="资产名称">
+						<template slot-scope="scope">
+							<div class="cell">{{scope.row.assetname || '-'}}</div>
+						</template>
 					</el-table-column>
 					<el-table-column
 						prop="issueamount"
