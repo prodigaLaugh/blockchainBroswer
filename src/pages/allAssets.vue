@@ -102,7 +102,6 @@ export default {
     methods: {
 		getBlockchains(fn){
 		    this.getBlockchainLists((data)=>{
-				console.log(data,9991)
 		        this.blockchainLists = data.data;
 		        this.chain_name = this.blockchainLists[0].Chainid;
 				fn && fn()
@@ -154,6 +153,20 @@ export default {
                         this.isLoading = false;
                     }
 					
+					this.$nextTick(()=>{
+						var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+						// windowHeight 可视区的高度
+						var windowHeight = document.documentElement.clientHeight || document.body.clientHeight;
+						// scrollHeight 滚动条的总高度
+						var scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+						// 滚动条到底部的条件
+						let distance = 50;
+						if(windowHeight>=scrollHeight){
+							this.getAssetLists()
+						}
+						
+					})
+					
 					
 					console.log(this.orderParams.page,222)
                     
@@ -163,11 +176,24 @@ export default {
                 })
         },
         scroll(person) {
+			var _this = this;
             window.onscroll = () => {
-                let bottomOfWindow = document.documentElement.offsetHeight - document.documentElement.scrollTop - window.innerHeight <= 200
-                if (bottomOfWindow && this.isLoading) {
-                    this.getAssetLists();
-                }
+
+				var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+				// windowHeight 可视区的高度
+				var windowHeight = document.documentElement.clientHeight || document.body.clientHeight;
+				// scrollHeight 滚动条的总高度
+				var scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+				// 滚动条到底部的条件
+				let distance = 50;
+				
+				
+				if(scrollTop + windowHeight >= (scrollHeight-distance) && this.isLoading){
+				  // 加载数据
+				  _this.getAssetLists()
+				}
+				
+                
             }
         }
     }

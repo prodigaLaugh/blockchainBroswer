@@ -48,7 +48,7 @@
 			
 			<div class="listsWrap">
 				<el-table
-					:data="assetInfo.TxList"
+					:data="txLists"
 					border
 					style="width: 100%">
 					<el-table-column
@@ -89,7 +89,7 @@
 			
 			<div class="listsWrap">
 				<el-table
-					:data="assetInfo.AssetTopList"
+					:data="assetTopLists"
 					border
 					style="width: 100%">
 					<el-table-column
@@ -141,7 +141,7 @@
 			
 			<div class="listsWrap">
 				<el-table
-					:data="assetInfo.AssetConcentrationRatio"
+					:data="assetConcentrationRatios"
 					border
 					style="width: 100%">
 					<el-table-column
@@ -201,15 +201,21 @@
 				blockchain_select:'',
 				chain_name:'',
 				dimension:'hour',
-				netoverviewInfo:{},
+				
 				assetInfo:{},
+				txLists:[],
+				assetTopLists:[],
+				assetConcentrationRatios:[]
 			}
 		},
 		created(){
 			this.getBlockchains(()=>{
-				this.getNetoverview();
-				this.getAssetsInfo()
+				this.getOverview()
 				this.getCharData();
+				
+				this.getTxLists()
+				this.getTopAssetInfoList()
+				this.getTopConcentrationRatioTotal()
 			})
 			
 		},
@@ -221,7 +227,7 @@
 			    this.dimension = val;
 			    this.getCharData();
 			},
-			getCharData(){
+			getCharData(){//获取交易量
 			    let url = `/chain_monitor/queryChainTotalTxs/${this.chain_name}/${this.dimension}`;
 			    
 			    this.$http.get(url)
@@ -287,6 +293,66 @@
 			    
 							
 			},
+			getOverview(){ //获取概况数据
+				
+				let url = `/chain_monitor/getAssetSurveyForMonitor/${this.chain_name}`
+				this.$http.get(url)
+				    .then(({data})=>{
+						if(data.code === '0'){
+							this.assetInfo = data.data
+						}
+				        
+				    })
+				    .catch(({data})=>{
+						console.log(data)
+				    })
+			},
+			getTxLists(){ //获取最新交易列表
+				
+				let url = `/chain_monitor/getTopTxInfoList/${this.chain_name}`
+				this.$http.get(url)
+				    .then(({data})=>{
+						if(data.code === '0'){
+							this.txLists = data.data.TxList
+						}
+				        
+				    })
+				    .catch(({data})=>{
+						console.log(data)
+				    })
+
+			},
+			getTopAssetInfoList(){ //获取最活跃数字资产
+				let url = `/chain_monitor/getTopAssetInfoList/${this.chain_name}`
+				this.$http.get(url)
+				    .then(({data})=>{
+						if(data.code === '0'){
+							this.assetTopLists = data.data.AssetTopList
+						}
+				        
+				    })
+				    .catch(({data})=>{
+						console.log(data)
+				    })
+			},
+			
+			getTopConcentrationRatioTotal(){ //获取集中度（
+				let url = `/chain_monitor/getTopConcentrationRatioTotal/${this.chain_name}`
+				this.$http.get(url)
+				    .then(({data})=>{
+						if(data.code === '0'){
+							this.assetConcentrationRatios = data.data.AssetConcentrationRatio;
+						}
+				        
+				    })
+				    .catch(({data})=>{
+						console.log(data)
+				    })
+				
+			},
+			
+			
+
 			
 			getBlockchains(fn){
 			    this.getBlockchainLists((data)=>{
@@ -297,29 +363,8 @@
 			
 			    })
 			},
-			getNetoverview(){
-			    let url = `/chain_monitor/queryNetInfo/${this.chain_name}`
-			    this.$http.get(url)
-			        .then(({data})=>{
-			            if(data.code === '0'){
-			                this.netoverviewInfo = data.data;
-			            }
-			            
-			        })
-			        .catch(({data})=>{
 			
-			        })
-			},
-			getAssetsInfo(){
-			    let url = `/chain_monitor/queryAssetInfo/${this.chain_name}`;
-			    this.$http.get(url)
-			        .then(({data})=>{
-			            this.assetInfo = data.data;
-			        })
-			        .catch(()=>{
 			
-			        })
-			}
 		}
 	}
 	
