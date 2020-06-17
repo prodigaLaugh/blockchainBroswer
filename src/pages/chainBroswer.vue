@@ -10,7 +10,7 @@
 			
 			<div class="listsWrap" >
 				<el-table
-					:data="indexInfo.block_list"
+					:data="blocks"
 					border
 					style="width: 100%">
 					<el-table-column
@@ -46,7 +46,7 @@
 			
 			<div class="listsWrap" >
 				<el-table
-					:data="indexInfo.asset_toplist"
+					:data="assetTopLists"
 					border
 					style="width: 100%">
 					<el-table-column
@@ -98,92 +98,70 @@ Vue.use(TableColumn);
 
 export default {
     created(){
-        this.getBlockchains();
+        this.getBlockchains(()=>{
+			this.getNetoverview()//获取最近区块
+			this.getTopAssetInfoList()
+		});
 		
     },
-    components: {  
-        
-	},
+    
     data(){
         return {
         
             blockchain_select:'',
-            lists:[],
 			
 			newPageLink:'',
+			chain_name: '',
 
-            indexInfo:{}
+          
+			blocks:[],
+			assetTopLists:[]
         }
     },
     methods:{
-		goNewLinkto(path, query){
+		goNewLinkto(path, query){ //打开新的页面
 			let routeUrl = this.$router.resolve({
 			  path: path,
 			  query: query
 			});
 			window.open(routeUrl.href, '_blank');
 		},
-        search(){
-            if(!this.searchText){
-                this.$message({
-                    message: '搜索内容不能为空！',
-					type: 'warning'
-                })
-                return false;
-            }
-            let params = {
-                chain_name:this.blockchain_select,
-                search:this.searchText.trim()
-            }
-			var newTab=window.open('about:blank');
-			
-            this.getSearchType(params,(data)=>{
-                let params = {
-                    chainid:this.blockchain_select,
-                    searchText:this.searchText
-                }
-				
-				var json = {
-					0:'/blockchainBrowser_adressDetail',
-					1:'/blockchainBrowser_assetsDetail',
-					2:'/blockchainBrowser_blockchainDetail',
-					3:'/blockchainBrowser_transactionDetail',
-					4:'/blockchainBrowser_UTXODetail'
-				}
-				let path = json[data.data];
-				this.newPageLink = path + '?chainid=' + this.blockchain_select + '&searchText='+ this.searchText;
-				
-				newTab.location.href = this.newPageLink;
-				
-				
-            },(data)=>{
-				newTab.location.href = '/blockchainBrowser_noresult'
-                this.$message({
-                    message: data && data.msg || '服务器错误',
-					type: 'warning'
-                })
-            })
+        getBlockchains(fn){ //获取链列表
+			this.getBlockchainLists((data)=>{
+			    const lists = data.data;
+			    this.chain_name = lists[0].Chainid;
+				fn && fn()
+			},()=>{
+						
+			})
         },
-        getBlockchains(){
-            this.getBlockchainLists((data)=>{
-                this.lists = data.data;
-                this.blockchain_select = this.lists[0].Chainid;
-                this.getIndexInfo(this.blockchain_select)
-            },()=>{
-
-            })
-        },
-        getIndexInfo(){
-            let url = `/chain_browser/initChainBrowser/${this.blockchain_select}`;
-            this.$http.get(url)
-                .then(({data})=>{
-                    console.log(data)
-                    this.indexInfo = data.data
-                })
-                .catch(()=>{
-
-                })
-        }
+       
+		getNetoverview(){//获取最近区块
+		    let url = `/chain_monitor/queryNetInfo/${this.chain_name}`
+		    this.$http.get(url)
+		        .then(({data})=>{
+		            if(data.code === '0'){
+		                this.blocks = data.data.block_list;
+		            }
+		            
+		        })
+		        .catch(({data})=>{
+		
+		        })
+		},
+		getTopAssetInfoList(){ //获取最活跃数字资产
+			let url = `/chain_monitor/getTopAssetInfoList/${this.chain_name}`
+			this.$http.get(url)
+			    .then(({data})=>{
+					if(data.code === '0'){
+						this.assetTopLists = data.data.AssetTopList
+					}
+			        
+			    })
+			    .catch(({data})=>{
+					console.log(data)
+			    })
+		},
     },
 	
 }

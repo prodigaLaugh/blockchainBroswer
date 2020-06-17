@@ -88,17 +88,17 @@
 				dimension:'hour',
 				netoverviewInfo:{},
 				assetInfo:{},
+				
 			}
 		},
 		created(){
 			this.getBlockchains(()=>{
 				this.getNetoverview();
-				this.getAssetsInfo()
 			})
 			
 		},
 		methods:{
-			goLinkto(path, val){
+			goLinkto(path, val){ //点击跳转方法
 			    this.$router.push({path: path, query:{chainid: this.chain_name,searchText:val}})
 			},
 			getBlockchains(fn){
@@ -111,7 +111,7 @@
 			
 			    })
 			},
-			getNetoverview(){
+			getNetoverview(){//获取最近区块
 			    let url = `/chain_monitor/queryNetInfo/${this.chain_name}`
 			    this.$http.get(url)
 			        .then(({data})=>{

@@ -220,7 +220,7 @@
 			
 		},
 		methods:{
-			goLinkto(path, val){
+			goLinkto(path, val){//点击跳转方法
 			    this.$router.push({path: path, query:{chainid: this.chain_name,searchText:val}})
 			},
 			selectTime(val){

@@ -109,10 +109,10 @@ export default {
 		
 		    })
 		},
-		goLinkto(path, val){
+		goLinkto(path, val){//点击跳转方法
 			this.$router.push({path: path, query:{chainid: this.chain_name,searchText:val}})
 		},
-        sortLists(val){
+        sortLists(val){//排序方法
             if(val.prop){
 				
                 this.orderParams.condition = val.prop =='market_value'
@@ -129,7 +129,7 @@ export default {
             this.getAssetLists();
         },
         
-        getAssetLists(){
+        getAssetLists(){ //获取全部资产
             let url = `/chain_browser/getChainAssetInfoList`
             if(!this.isLoading){
                 return false;
@@ -175,7 +175,7 @@ export default {
 
                 })
         },
-        scroll(person) {
+        scroll(person) {//页面滚动方法
 			var _this = this;
             window.onscroll = () => {
 

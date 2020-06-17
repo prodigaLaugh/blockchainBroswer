@@ -22,7 +22,7 @@
 					<div class="listWrap">
 						<img src="../assets/home/icon6.png" alt="">
 						<div>
-							<span>{{netoverviewInfo.blocktotal}}</span>
+							<span>{{netoverviewInfo.chainRunTime}}</span>
 							<span>总运行时间</span>
 						</div>
 					</div>
@@ -50,14 +50,14 @@
 					<div class="listWrap">
 						<img src="../assets/home/icon4.png" alt="">
 						<div>
-							<span>{{assetInfo.assettotal}}</span>
+							<span>{{netoverviewInfo.assettotal}}</span>
 							<span>链上资产总数</span>
 						</div>
 					</div>
 					<div class="listWrap">
 						<img src="../assets/home/icon5.png" alt="">
 						<div>
-							<span>{{assetInfo.holdertotal}}</span>
+							<span>{{netoverviewInfo.holdertotal}}</span>
 							<span>资产持有总数</span>
 						</div>
 					</div>
@@ -89,9 +89,9 @@
 						<span style="margin-bottom:20px;">最近区块(Latest 10)</span>
 					</div>
 					
-					<div class="listsWrap" v-if="netoverviewInfo.block_list">
+					<div class="listsWrap" v-if="blocks.length">
 						<el-table
-						    :data="netoverviewInfo.block_list"
+						    :data="blocks"
 						    border
 						    style="width: 100%">
 						    <el-table-column
@@ -127,9 +127,9 @@
 						</div>
 					</div>
 					
-					<div class="listsWrap"  v-if="assetInfo.AssetTopList">
+					<div class="listsWrap"  v-if="assetTopLists.length">
 						<el-table
-						        :data="assetInfo.AssetTopList"
+						        :data="assetTopLists"
 						        border
 						        style="width: 100%">
 						        <el-table-column
@@ -185,14 +185,20 @@
 				chain_name:'',
 				dimension:'hour',
 				netoverviewInfo:{},
-				assetInfo:{},
+	
+				blocks:[],
+				assetTopLists:[]
 			}
 		},
 		created(){
 			this.getBlockchains(()=>{
+				this.getOverview1()
+				this.getOverview2()
 				this.getCharData();
-				this.getNetoverview();
-				this.getAssetsInfo()
+				
+				this.getNetoverview()
+				this.getTopAssetInfoList()
+				               
 			})
 			
 		},
@@ -224,7 +230,6 @@
 			},
 			getBlockchains(fn){
 			    this.getBlockchainLists((data)=>{
-					console.log(data,9991)
 			        this.blockchainLists = data.data;
 			        this.chain_name = this.blockchainLists[0].Chainid;
 					fn && fn()
@@ -232,11 +237,48 @@
 			
 			    })
 			},
+			getOverview1(){
+				
+				let url = `/chain_monitor/getAssetSurveyForMonitor/${this.chain_name}`
+				this.$http.get(url)
+					.then(({data})=>{
+						if(data.code === '0'){
+							var datas = data.data
+							var obj = Object.assign({}, this.netoverviewInfo, datas,)
+							
+							this.netoverviewInfo = obj
+							
+						}
+						
+					})
+					.catch(({data})=>{
+							
+					})
+			},
+			getOverview2(){
+				
+				let url = `/chain_monitor/queryNetInfo/${this.chain_name}`
+				this.$http.get(url)
+					.then(({data})=>{
+						console.log(data,'11172')
+						if(data.code === '0'){
+							var datas = data.data
+							var obj = Object.assign({}, this.netoverviewInfo, datas,)
+							
+							this.netoverviewInfo = obj
+							
+						}
+						
+					})
+					.catch(({data})=>{
+							
+					})
+			},
 			selectTime(val){
 			    this.dimension = val;
 			    this.getCharData();
 			},
-			getCharData(){
+			getCharData(){ //获取交易量
 			    let url = `/chain_monitor/queryChainTotalTxs/${this.chain_name}/${this.dimension}`;
 			    
 			    this.$http.get(url)
@@ -303,15 +345,16 @@
 							
 			},
 			
-			goLinkto(path, val){
+			goLinkto(path, val){ //点击跳转方法
 			    this.$router.push({path: path, query:{chainid: this.chain_name,searchText:val}})
 			},
-			getNetoverview(){
+			
+			getNetoverview(){//获取最近区块
 			    let url = `/chain_monitor/queryNetInfo/${this.chain_name}`
 			    this.$http.get(url)
 			        .then(({data})=>{
 			            if(data.code === '0'){
-			                this.netoverviewInfo = data.data;
+			                this.blocks = data.data.block_list;
 			            }
 			            
 			        })
@@ -319,16 +362,20 @@
 			
 			        })
 			},
-			getAssetsInfo(){
-			    let url = `/chain_monitor/queryAssetInfo/${this.chain_name}`;
-			    this.$http.get(url)
-			        .then(({data})=>{
-			            this.assetInfo = data.data;
-			        })
-			        .catch(()=>{
 			
-			        })
-			}
+			getTopAssetInfoList(){ //获取最活跃数字资产
+				let url = `/chain_monitor/getTopAssetInfoList/${this.chain_name}`
+				this.$http.get(url)
+				    .then(({data})=>{
+						if(data.code === '0'){
+							this.assetTopLists = data.data.AssetTopList
+						}
+				        
+				    })
+				    .catch(({data})=>{
+						console.log(data)
+				    })
+			},
 			
 		}
 	}
