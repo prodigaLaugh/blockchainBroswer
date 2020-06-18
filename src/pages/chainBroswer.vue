@@ -130,6 +130,7 @@ export default {
 			this.getBlockchainLists((data)=>{
 			    const lists = data.data;
 			    this.chain_name = lists[0].Chainid;
+				this.blockchain_select = this.chain_name
 				fn && fn()
 			},()=>{
 						

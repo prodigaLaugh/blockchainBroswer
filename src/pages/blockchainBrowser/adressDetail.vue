@@ -61,10 +61,10 @@
 							<span>接收交易</span>
 						</div>
 						<div>
-							<span>{{assetsLists[assetIndex].balance}}</span>
-							<span>{{assetsLists[assetIndex].tx_sums}}</span>
-							<span>{{assetsLists[assetIndex].from_txsums}}</span>
-							<span>{{assetsLists[assetIndex].to_txsums}}</span>
+							<span>{{assetOverview.balance}}</span>
+							<span>{{assetOverview.tx_sums}}</span>
+							<span>{{assetOverview.from_txsums}}</span>
+							<span>{{assetOverview.to_txsums}}</span>
 						</div>
 					</div>
 
@@ -182,6 +182,7 @@ export default {
             adressInfo:{},
             assetId:'',
             assetsLists:[],
+			assetOverview:{},
 
             assetIndex:0,
             params_assetPagination:{
@@ -212,14 +213,15 @@ export default {
             this.assetIndex = index;
             this.assetId = id;
             this.getTransactionLists();
+			this.getAssetOverview()
         },
-        getAdressDetail(){
-            let url = `/chain_browser/getAddressInfo`;
+        getAdressDetail(){ // 获取地址概况
+            let url = `/chain_browser/getAddressSurveyInfo`;
 
             let params = this.getRouteParams(['chainid','searchText'],['chain_name','address_id'])
             this.$http.post(url, params)
                 .then(({data})=>{
-
+				
                     this.adressInfo = data.data;
 
                     let lists = data.data.asset_info;
@@ -229,6 +231,7 @@ export default {
 						
                         this.assetId = lists[0].asset_id;
                         this.getTransactionLists()
+						this.getAssetOverview()
                     }
                     
                 })
@@ -236,7 +239,23 @@ export default {
                     console.log(data)
                 })
         },
-        getTransactionLists(){
+		getAssetOverview(){//获取资产概况
+			let url = `/chain_browser/getAssetSurveyInfoByAddress`;
+			
+			let obj = this.getRouteParams(['chainid','searchText'],['chain_name','address_id'])
+			
+			var  params = Object.assign(obj, {asset_id: this.assetId}) 
+			this.$http.post(url, params)
+			    .then(({data})=>{
+					this.assetOverview = data.data.asset_info[0]
+			        
+			    })
+			    .catch(({data})=>{
+			        console.log(data)
+			    })
+		},
+		
+        getTransactionLists(){//获取最新交易
             let url = `/chain_browser/getAddressTxsInfo`;
 
             let params = this.getRouteParams(['chainid','searchText'],['chain_name','address_id'])
@@ -262,7 +281,11 @@ export default {
 							this.transactionLists.push(...lists);
 						}
 					    this.params_assetPagination.page = (page+1);
-					    this.isLoading = true;
+						setTimeout(()=>{
+							this.isLoading = true;
+						},100)
+							 
+					   
 					}else{
 					    this.isLoading = false;
 					}
@@ -280,12 +303,28 @@ export default {
 		await this.getAdressDetail();
 		
 		this.$nextTick(()=>{
+			
+			var _this = this;
 			window.onscroll = () => {
-			    let bottomOfWindow = document.documentElement.offsetHeight - document.documentElement.scrollTop - window.innerHeight <= 200
-			    if (bottomOfWindow && this.isLoading && this.assetId) {
-			        this.getTransactionLists();
-			    }
+			
+				var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+				// windowHeight 可视区的高度
+				var windowHeight = document.documentElement.clientHeight || document.body.clientHeight;
+				// scrollHeight 滚动条的总高度
+				var scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+				// 滚动条到底部的条件
+				let distance = 50;
+				
+				
+				if(scrollTop + windowHeight >= (scrollHeight-distance) && this.isLoading && this.assetId){
+				  // 加载数据
+				  _this.getTransactionLists()
+				}
+				
+			    
 			}
+			
+			
 		})
 	}
 }
