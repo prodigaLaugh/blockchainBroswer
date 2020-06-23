@@ -1,7 +1,7 @@
 <template>
     <div class="adressDetail_wrap">
         <my-header/>
-        <div class="detailOuterWrap adressDetail_containerWrap">
+        <div class="detailOuterWrap adressDetail_containerWrap" v-if="blockInfo && blockInfo.block_hash">
 			<div class="topTitle">区块详情</div>
             <div class="adressDetail_addressWrap">
 				<div class="commonDetailTitle">区块{{blockInfo.block_height}}</div>
@@ -220,6 +220,7 @@ export default {
             let url = `/chain_browser/getBlockInfo`;
 
             let params = this.getRouteParams(['chainid','searchText'],['chain_name','block_height'])
+			
             params.block_height = params.block_height - 0;
             this.$http.post(url, params)
                 .then(({data})=>{
@@ -228,10 +229,13 @@ export default {
 
                     let lists = data.data.asset_info;
                     this.assetsLists = lists;
-                    if(lists.length){
+                    if(lists && lists.length){
                         this.assetId = lists[0].asset_id;
                         this.getTransactionLists(this.assetId)
-                    }
+                    }else{
+						this.transactionLists.splice(0,999);
+						this.totalNum = 0;
+					}
                     
                     
                 })
@@ -251,7 +255,7 @@ export default {
             this.$http.post(url, currrentParams)
                 .then(({data})=>{
                     if(data.code === '0'){
-                        this.transactionLists = data.data.tx_list;
+                        this.transactionLists.splice(0,999,...data.data.tx_list);
                         this.totalNum = data.data.total_item;
                     }
                     

@@ -51,7 +51,7 @@ export default{
     Vue.prototype.getRouteParams = function(queryKey, paramsKey){ //获取参数
       let query = this.$route.query;
       var obj = {}
-
+	
       queryKey.map((item,i)=>{
         obj[paramsKey[i]] = query[item];
       })

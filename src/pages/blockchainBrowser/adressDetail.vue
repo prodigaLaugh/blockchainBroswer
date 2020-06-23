@@ -63,8 +63,8 @@
 						<div>
 							<span>{{assetOverview.balance}}</span>
 							<span>{{assetOverview.tx_sums}}</span>
-							<span>{{assetOverview.from_txsums}}</span>
 							<span>{{assetOverview.to_txsums}}</span>
+							<span>{{assetOverview.from_txsums}}</span>
 						</div>
 					</div>
 
