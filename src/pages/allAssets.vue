@@ -12,7 +12,7 @@
 					style="width: 100%">
 					<el-table-column
 						label="资产ID"
-						width="200">
+						width="180">
 						<template slot-scope="scope">
 							<div 
 								class="cell blue"
@@ -25,7 +25,7 @@
 					<el-table-column
 						prop="asset_name"
 						label="资产名称"
-						width="110">
+						width="80">
 					</el-table-column>
 					<el-table-column
 						prop="late_txtime"
@@ -43,7 +43,13 @@
 						width="200">
 					</el-table-column>
 					<el-table-column
-						prop="market_value"
+					    prop="available_amount"
+						sortable="custom"
+					    label="现有总量"
+						width="200">
+					</el-table-column>
+					<el-table-column
+						prop="available_amount"
 						sortable="custom"
 						label="总市值"
 						width="200">
@@ -143,7 +149,7 @@ export default {
 					
                     if(lists&&lists.length){
 						if(page === 1 ){
-							this.assetsLists.splice(0,9999,...lists)
+							this.assetsLists.splice(0,this.orderParams.page_size,...lists)
 						}else{
 							this.assetsLists.push(...lists);
 						}
@@ -196,7 +202,8 @@ export default {
                 
             }
         }
-    }
+    },
+	
 }
 </script>
 

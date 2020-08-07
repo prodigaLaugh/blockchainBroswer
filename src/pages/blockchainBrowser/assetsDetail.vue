@@ -35,8 +35,8 @@
 								<span>{{assetInfo.create_time}} </span>
 						</div>
 						<div class="adressDetail_addressList">
-								<span></span>
-								<span></span>
+								<span>现有总量</span>
+								<span>{{assetInfo.available_amount}}</span>
 						</div>
 					</div>
 

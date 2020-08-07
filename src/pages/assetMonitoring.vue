@@ -205,21 +205,29 @@
 				assetInfo:{},
 				txLists:[],
 				assetTopLists:[],
-				assetConcentrationRatios:[]
+				assetConcentrationRatios:[],
+				
+				timer:null
 			}
 		},
 		created(){
-			this.getBlockchains(()=>{
-				this.getOverview()
-				this.getCharData();
-				
-				this.getTxLists()
-				this.getTopAssetInfoList()
-				this.getTopConcentrationRatioTotal()
-			})
+			this.getLists()
+			this.timer = setInterval(()=>{
+				this.getLists()
+			}, 5000)
 			
 		},
 		methods:{
+			getLists(){
+				this.getBlockchains(()=>{
+					this.getOverview()
+					this.getCharData();
+					
+					this.getTxLists()
+					this.getTopAssetInfoList()
+					this.getTopConcentrationRatioTotal()
+				})
+			},
 			goLinkto(path, val){//点击跳转方法
 			    this.$router.push({path: path, query:{chainid: this.chain_name,searchText:val}})
 			},
@@ -365,6 +373,9 @@
 			},
 			
 			
+		},
+		beforeDestroy(){
+			clearInterval(this.timer)
 		}
 	}
 	

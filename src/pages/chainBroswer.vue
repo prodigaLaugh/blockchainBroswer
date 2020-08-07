@@ -97,13 +97,6 @@ Vue.use(Table);
 Vue.use(TableColumn);
 
 export default {
-    created(){
-        this.getBlockchains(()=>{
-			this.getNetoverview()//获取最近区块
-			this.getTopAssetInfoList()
-		});
-		
-    },
     
     data(){
         return {
@@ -115,10 +108,25 @@ export default {
 
           
 			blocks:[],
-			assetTopLists:[]
+			assetTopLists:[],
+			
+			timer:null
         }
     },
+	created(){
+	    this.getLists()
+	    this.timer = setInterval(()=>{
+	    	this.getLists()
+	    }, 5000)
+		
+	},
     methods:{
+		getLists(){
+			this.getBlockchains(()=>{
+				this.getNetoverview()//获取最近区块
+				this.getTopAssetInfoList()
+			});
+		},
 		goNewLinkto(path, query){ //打开新的页面
 			let routeUrl = this.$router.resolve({
 			  path: path,
@@ -164,6 +172,9 @@ export default {
 			    })
 		},
     },
+	beforeDestroy(){
+		clearInterval(this.timer)
+	}
 	
 }
 </script>

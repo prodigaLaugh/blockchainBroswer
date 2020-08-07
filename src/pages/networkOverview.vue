@@ -88,22 +88,29 @@
 				dimension:'hour',
 				netoverviewInfo:{},
 				assetInfo:{},
+				timer:null
 				
 			}
 		},
 		created(){
-			this.getBlockchains(()=>{
-				this.getNetoverview();
-			})
+			
+			this.getLists()
+			this.timer = setInterval(()=>{
+				this.getLists()
+			}, 5000)
 			
 		},
 		methods:{
+			getLists(){
+				this.getBlockchains(()=>{
+					this.getNetoverview();
+				})
+			},
 			goLinkto(path, val){ //点击跳转方法
 			    this.$router.push({path: path, query:{chainid: this.chain_name,searchText:val}})
 			},
 			getBlockchains(fn){
 			    this.getBlockchainLists((data)=>{
-					console.log(data,9991)
 			        this.blockchainLists = data.data;
 			        this.chain_name = this.blockchainLists[0].Chainid;
 					fn && fn()
@@ -124,6 +131,9 @@
 			
 			        })
 			},
+		},
+		beforeDestroy(){
+			clearInterval(this.timer)
 		}
 	}
 	

@@ -23,7 +23,7 @@
 						<img src="../assets/home/icon6.png" alt="">
 						<div>
 							<span>{{netoverviewInfo.chainRunTime}}</span>
-							<span>总运行时间</span>
+							<span>总运行天数</span>
 						</div>
 					</div>
 					<div class="listWrap">
@@ -151,6 +151,10 @@
 						            prop="issueamount"
 						            label="发行总量">
 						        </el-table-column>
+								<!-- <el-table-column
+								    prop="issueamount"
+								    label="现有总量">
+								</el-table-column> -->
 						        <el-table-column
 						            prop="holdernums"
 						            label="持有人数">
@@ -187,19 +191,17 @@
 				netoverviewInfo:{},
 	
 				blocks:[],
-				assetTopLists:[]
+				assetTopLists:[],
+				timer:null
 			}
 		},
 		created(){
-			this.getBlockchains(()=>{
-				this.getOverview1()
-				this.getOverview2()
-				this.getCharData();
-				
-				this.getNetoverview()
-				this.getTopAssetInfoList()
-				               
-			})
+			
+			this.getLists()
+			this.timer = setInterval(()=>{
+				this.getLists()
+			}, 5000)
+			
 			
 		},
 		methods:{
@@ -228,6 +230,14 @@
 			        })
 			    })
 			},
+			getLists(){
+				this.getBlockchains(()=>{
+					this.getOverview1()
+					this.getOverview2()
+					this.getCharData();
+					this.getNetoverview()
+				})
+			},
 			getBlockchains(fn){
 			    this.getBlockchainLists((data)=>{
 			        this.blockchainLists = data.data;
@@ -244,9 +254,10 @@
 					.then(({data})=>{
 						if(data.code === '0'){
 							var datas = data.data
-							var obj = Object.assign({}, this.netoverviewInfo, datas,)
+							var obj = Object.assign(this.netoverviewInfo, datas)
 							
-							this.netoverviewInfo = obj
+							
+							this.getTopAssetInfoList()
 							
 						}
 						
@@ -263,9 +274,7 @@
 						console.log(data,'11172')
 						if(data.code === '0'){
 							var datas = data.data
-							var obj = Object.assign({}, this.netoverviewInfo, datas,)
-							
-							this.netoverviewInfo = obj
+							Object.assign(this.netoverviewInfo, datas,)
 							
 						}
 						
@@ -369,6 +378,7 @@
 				    .then(({data})=>{
 						if(data.code === '0'){
 							this.assetTopLists = data.data.AssetTopList
+							
 						}
 				        
 				    })
@@ -377,6 +387,9 @@
 				    })
 			},
 			
+		},
+		beforeDestroy(){
+			clearInterval(this.timer)
 		}
 	}
 	
